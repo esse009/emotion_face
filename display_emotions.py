@@ -1,0 +1,54 @@
+import asyncio
+from bleak import BleakClient, BleakScanner
+
+
+# 0500040101
+
+async def get_client():
+    client = BleakClient("9F:CB:5B:1B:99:21")
+    await client.connect()
+    return client
+
+async def get_characteristic(client):
+    interaction_service = client.services.get_service('00FA')
+    return interaction_service.get_chracteristic('FA02')
+
+
+async def display_emotion(client, characteristic, emotion):
+    match emotion:
+        case "angry":
+            return await display_angry(client, characteristic)
+        case "fear":
+            return await display_fear(client, characteristic)
+        case "sad":
+            return await display_sad(client, characteristic)
+        case "disgust":
+            return await display_disgust(client, characteristic)
+        case "happy":
+            return await display_happy(client, characteristic)
+        case "surprise":
+            return await display_surprise(client, characteristic)
+        case _:
+            return await display_neutral(client, characteristic)
+
+async def main():
+	# devices = await BleakScanner.discover()
+	# for d in devices:
+	# 	print(d)
+	# client = BleakClient("DEE61A7C-DA3A-F609-A58D-13E3D3757C89")
+	client = BleakClient("9F:CB:5B:1B:99:21")
+	# await client.pair()
+	# await client.connect()
+	await client.connect()
+	
+	interaction_service = client.services.get_service('00FA')
+	interaction_characteristic = interaction_service.get_characteristic('FA02')
+
+	await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
+	
+	await client.write_gatt_char(interaction_characteristic, bytes.fromhex("e006000000d706000089504e470d0a1a0a0000000d4948445200000020000000100802000000f862ea0e000000017352474200aece1ce900000078655849664d4d002a000000080005011200030000000100010000011a0005000000010000004a011b0005000000010000005201280003000000010002000087690004000000010000005a00000000000000480000000100000048000000010002a00200040000000100000020a0030004000000010000001000000000b1553fc4000000097048597300000b1300000b1301009a9c180000001c69444f5400000002000000000000000800000028000000080000000800000332b54f1311000002fe4944415438112cced74f1a0100c771fea1d697f6a14913d39846d39ab847dd58a116030acad2639e1c1e78a20c45445440145464290e86a252a90457e36aad9a582bb67a88db98b467dae493efc3efe987cb104e90fb36089a481a602957858a107fbec453a1592d940588dab51acb21c381b25c71a6334677a274e719dd8ed6d9d05adb59ede8239af53faaf5ec9f1a6cb19de74b669fe7f05e1609717899a754e62d69f114c06e72df1aa96795a45ba50dee528c5b94fe1db6eb14c399bcc4344cc41fb9e3f5e371f6d8398685713d62ba62d803a613653851e6588c3d7e512c9b4f2c8592f020aeb2dd57088dbe57f8f0add380639f6a"), True)
+	await client.write_gatt_char(interaction_characteristic, bytes.fromhex("fac21edd23f74628867560fcb871e68ae3fe25f45f89e66e1bc64ef89e38387323f45f0b7c578fbc977ccf256ffa823f758e953b15e74fa2b4a10386fdf843e7523201caae6ec4f15dbbb9bcfe4268188fb85896357c8baba275a2c1ba09d8bf2a961f9a66518e635f3c1b6b5ebc114cfe84fc2812ba6f0e3d4817ef250bb718387021193f401c5bb0ef543c1d6db3af64b2faca3b4234c34a365950560fe344b665629b339da1e65a231975ca3795120c4debd5acdfeab6ffc882a7c0d01aec3b522d5fc3fe2364e177fbe7986a24a07106db57ee95913ba5ff50615b52dac30aef81ccbda3767ccaa2cacb6087c0b2544c6f2c6134e1a05e936a6e379ba9a4b45a5e1344e955706635c23707c1a1a0367c62dcb9934e6e74848efb366f64fe3d75f854615b9088410094f484a3facdbbeee08f4ec77cb73bd41df8aef66e31e4960c0a925ddd8298bdc5758d05b510ee5d15bd4e664cab1424e6d292cbb95994a63c1a42570c92c04ec8346d5e8f76ce6e1b57a2b66f979ac04eff72b4456b50c0bc1c224012f70cae9e189c1e8db64bafef1e30e8844a7d621137a918482ca84774a6fc1a610e19c4e5957e4cade03c4d263c7b53f92aab3aa5944d644b41891c12c10028ed1ab46a0c66c380d93832a2330febed6eb9a24dddc4ca25b05ee43708557a6d87542badd7896a755c4a15a1e649"), True)
+	await client.write_gatt_char(interaction_characteristic, bytes.fromhex("2a35e12d392185c8e5d03348fc5402e72f000000ffff324d5b80000002c6494441541592c952da000040f9871e9c71ea56082e2c49086912b3ef248140409035141003d108615394a94e5d98a9b6b5ed38edc18fad9d79977779a717c8d47cfde80631bd98dc61d31dbdd8cbd587a5d6a8dd9fd9ce747977f9bc9cbf3ccc9e9793a7dbc9b787f9efc7eb1ff723bdee83d9f1893f7b795cbc3e9eff9d0f7e9db895bab7adb831f5783fd3be5e8cf2ce22697a819460cb159fab4e01ba4aa61a62a645a58fe89cc3145caddcbf980ebe5c5fcce6f3e164d41f8e2ece27af4fe77fbe8e0e5a9e50f1c7e3f1cfbbd9f266ba9c7a576eefb0e6429aa31c749482fdfdfeace29c47c4a3009b754abd0995ef027459ad4f84f258287aa2d5130b3de1c0b19afd96ebd74f465ac34b37ce6c6774bd98de7e1eb6bc496b787973379f2f2677f7be7f7159ef9c9a4d5ffd7465368764d6e9b85eaa3608b376609b29a146670bb7627c59c87559a3c5e84d526d70bacd6a0dc1ea96dac34cd5550b5d3edfe70e4e51d34d66bdfdc2195d1aec5b0e9a394eb52f0d672935e650ca4152edaabb90ebb3305d798f982b51251025730069ad82721837634c3e42e72254364ee512741ee38ab8504eb0c58458c5d2c764fe8ccc1ca3520d7d53a986ab76922f27f9435cef52d680a92c88820f90a5cda4b94d1f0631"), True)
+	await client.write_gatt_char(interaction_characteristic, bytes.fromhex("2b481401aa1c8849a5a85c5989314156db49a57735234c289ba0b816173740791352429809b245843f4cb285246da1b4f591c9634c1ea52c94caa16416254d98cc62d9015118c795ce16965b47cdd07e71976b44a54e20c44b414a5c89901f1821c4492146de4cf0ab116623ce03b01441559830104287f0370c8848839801e30688e910a6238491c0b524aec2b81693db48fa14c99cc6d5a33da1b9c3d57759fb8d00c071419a7b07e01b04b341b26b38bb8e3000c481a804a20a1067b7217e0716a2881c45a4c4ff960a634a1c55e2881806b910c8efc1e20e2c45a5369872de2e82b45e446c4784d61edfdce5ec7f6b5bc44a35bf52120000000049454e44ae426082"), True)
+	
+	
