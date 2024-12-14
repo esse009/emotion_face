@@ -12,7 +12,8 @@ async def get_client():
 async def get_characteristic(client):
     interaction_service = client.services.get_service('00FA')
     interaction_characteristic = interaction_service.get_characteristic('FA02')
-    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0700088001000b"), True)
+    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
+    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("08000180173b1400"), True)
     return interaction_characteristic
 
 async def display_neutral(client, characteristic):
