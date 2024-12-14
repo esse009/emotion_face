@@ -1,7 +1,7 @@
 import asyncio
 import display_emotions
 import emotion
-
+import time
 
 async def main():
     emotion_client = await display_emotions.get_client()
@@ -11,9 +11,12 @@ async def main():
 
     while True:
         e = emotion.get_emotion(camera, classifier)
-        display_emotions.display_emotion(emotion_client, emotion_char, e)
+        if (e == "waiting"):
+            continue
+        await display_emotions.display_emotion(emotion_client, emotion_char, e)
+        time.sleep(10)
     
     emotion.cleanup_camera(camera)
 
 if __name__ == "__main__":
-    asyncio.run(main)
+    asyncio.run(main())
