@@ -54,17 +54,29 @@ def generate_response_for_handshake(received_data):
     full_response = response_type + response_context + response_additional_data
     return full_response
 
+client_global = ""
+character = ""
+
+async def callback(sender, data: bytearray):
+    global client_global, character
+    print("finishing handshake")
+    response = generate_response_for_handshake(binascii.hexlify(data))
+    await client_global.write_gatt_char(character, bytes.fromhex(response))
+
 async def get_characteristic(client):
+    global client_global
+
     interaction_service = client.services.get_service('00FA')
     interaction_characteristic = interaction_service.get_characteristic('FA02')
 
     data_characteristic = interaction_service.get_characteristic('FA03')
 
+    client_global = client
+    character = interaction_characteristic
+    client.start_notify(data_characteristic, callback)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
-    data = await client.read_gatt_char(data_characteristic)
     # await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040100"), True)
-    response = generate_response_for_handshake(binascii.hexlify(data))
-    await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response))
+    time.sleep(5)
     return interaction_characteristic
 
 async def display_neutral(client, characteristic):
