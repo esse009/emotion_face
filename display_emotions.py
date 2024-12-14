@@ -60,7 +60,7 @@ async def get_characteristic(client):
 
     data_characteristic = interaction_service.get_characteristic('FA03')
 
-    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"))
+    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
     data = await client.read_gatt_char(data_characteristic)
     # await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040100"), True)
     response = generate_response_for_handshake(binascii.hexlify(data))
