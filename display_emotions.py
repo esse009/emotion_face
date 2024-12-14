@@ -1,6 +1,6 @@
 import asyncio
 from bleak import BleakClient, BleakScanner
-
+import time
 
 # 0500040101
 
@@ -13,8 +13,11 @@ async def get_characteristic(client):
     interaction_service = client.services.get_service('00FA')
     interaction_characteristic = interaction_service.get_characteristic('FA02')
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
+    time.sleep(0.5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
+    time.sleep(0.5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0800018017301600"), True)
+    time.sleep(0.5)
     return interaction_characteristic
 
 async def display_neutral(client, characteristic):
