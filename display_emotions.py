@@ -58,7 +58,7 @@ async def get_characteristic(client):
     interaction_service = client.services.get_service('00FA')
     interaction_characteristic = interaction_service.get_characteristic('FA02')
 
-    data_characteristic = interaction_service.get_characteristic('FA02')
+    data_characteristic = interaction_service.get_characteristic('FA03')
 
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"))
     data = await client.read_gatt_char(data_characteristic)
