@@ -58,7 +58,6 @@ response = ""
 
 def callback(sender, data: bytearray):
     global response
-    print("finishing handshake")
     response = generate_response_for_handshake(binascii.hexlify(data))
    
 
@@ -72,8 +71,10 @@ async def get_characteristic(client):
 
     client.start_notify(data_characteristic, callback)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
-    time.sleep(5.0)
+    time.sleep(50.0)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
+    print(response)
+    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
     return interaction_characteristic
 
 async def display_neutral(client, characteristic):
