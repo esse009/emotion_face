@@ -82,10 +82,10 @@ async def get_characteristic(client):
     await client.start_notify(data_characteristic, callback)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
     # wait until we get back a response
-    asyncio.sleep(5)
+    await asyncio.sleep(5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
     print(response)
-    asyncio.sleep(5)
+    await asyncio.sleep(5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(magic_string), True)
     print(magic_string)
     return interaction_characteristic
