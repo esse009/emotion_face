@@ -60,7 +60,7 @@ processed = False
 event = threading.Event()
 def callback(sender, data: bytearray):
     # global response
-    global response, processed, is_waiting_for_response
+    global response, processed, event
     if (processed): 
         event.set()
         return
@@ -88,8 +88,8 @@ async def get_characteristic(client):
 
 
 async def write_start_data(client, characteristic):
+    global event
     # set mode to image
-    is_waiting_for_response = True
     await client.write_gatt_char(characteristic, bytes.fromhex("0500040101"), True)
     event.clear()
     event.wait()
