@@ -61,8 +61,8 @@ event = threading.Event()
 def callback(sender, data: bytearray):
     # global response
     global response, processed, event
+    event.set()
     if (processed): 
-        event.set()
         print(''.join(format(x, '02x') for x in data))
         return
     processed = True
@@ -71,7 +71,7 @@ def callback(sender, data: bytearray):
    
 
 async def get_characteristic(client):
-    global response
+    global response, event
 
     interaction_service = client.services.get_service('00FA')
     interaction_characteristic = interaction_service.get_characteristic('FA02')
@@ -79,11 +79,13 @@ async def get_characteristic(client):
     data_characteristic = interaction_service.get_characteristic('FA03')
 
     await client.start_notify(data_characteristic, callback)
+    event.clear()
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
     # wait until we get back a response
-    await asyncio.sleep(5)
+    event.wait()
+    event.clear()
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
-    await asyncio.sleep(5)
+    event.wait()
     await display_angry(client, interaction_characteristic)
     return interaction_characteristic
 
