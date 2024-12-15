@@ -87,15 +87,18 @@ async def get_characteristic(client):
     event.clear()
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
     await event.wait()
+
+    # This seems to clear the screen
+    event.clear()
+    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
+    await event.wait()
+
     return interaction_characteristic
 
 
 async def write_start_data(client, characteristic):
     global event
-    # set mode to image
-    event.clear()
-    await client.write_gatt_char(characteristic, bytes.fromhex("0500040101"), True)
-    await event.wait()
+
     # we will wait for a response to indicate that the receival of the image was successfull
     event.clear()
 
