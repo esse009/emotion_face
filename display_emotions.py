@@ -59,8 +59,9 @@ response = ""
 def callback(sender, data: bytearray):
     # global response
     global response
-    print(str(binascii.hexlify(data)))
-    response = generate_response_for_handshake(str(binascii.hexlify(data)))
+    str_data = ''.join(format(x, '02x') for x in data)
+    print(str_data)
+    response = generate_response_for_handshake(str_data)
    
 
 async def get_characteristic(client):
