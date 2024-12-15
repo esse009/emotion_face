@@ -1,5 +1,6 @@
 import asyncio
 import binascii
+import threading
 from bleak import BleakClient, BleakScanner
 import time
 
@@ -56,12 +57,12 @@ def generate_response_for_handshake(received_data):
 
 response = ""
 processed = False
-is_waiting_for_response = False
+event = threading.Event()
 def callback(sender, data: bytearray):
     # global response
     global response, processed, is_waiting_for_response
     if (processed): 
-        is_waiting_for_response = False
+        event.set()
         return
     processed = True
     str_data = ''.join(format(x, '02x') for x in data)
@@ -90,8 +91,8 @@ async def write_start_data(client, characteristic):
     # set mode to image
     is_waiting_for_response = True
     await client.write_gatt_char(characteristic, bytes.fromhex("0500040101"), True)
-    while is_waiting_for_response:
-        await asyncio.sleep(0.5)
+    event.clear()
+    event.wait()
     # this seems to represent the image index, as this gets incremented, hardcoded for now
     await client.write_gatt_char(characteristic, bytes.fromhex("07000880010011"), True)
 
