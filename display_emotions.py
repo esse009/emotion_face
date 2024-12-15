@@ -55,10 +55,13 @@ def generate_response_for_handshake(received_data):
     return full_response
 
 response = ""
+processed = False
 
 def callback(sender, data: bytearray):
     # global response
-    global response
+    global response, processed
+    if (processed): return
+    processed = True
     str_data = ''.join(format(x, '02x') for x in data)
     print("data: " + str_data)
     print("l")
