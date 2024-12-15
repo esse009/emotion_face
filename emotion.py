@@ -6,7 +6,7 @@ from picamera2 import Picamera2
 
 def get_camera():
     picam2 = Picamera2()
-    picam2.configure(picam2.create_still_configuration(main={"format": 'RGB888',
+    picam2.configure(picam2.create_still_configuration(main={"format": 'XRGB8888',
                                                             "size": (1920, 1080)}))
     picam2.start()
     return picam2
@@ -19,8 +19,7 @@ def get_classifier():
 
 def get_emotion(camera, classifier):
     frame = camera.capture_array()
-    gray_image = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-    faces = classifier.detectMultiScale(gray_image, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+    faces = classifier.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     if (len(faces) == 0):
         return "neutral"
     # We only analyse one face or we would get confused
