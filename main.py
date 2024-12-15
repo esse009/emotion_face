@@ -2,6 +2,7 @@ import asyncio
 import display_emotions
 import emotion
 import time
+import servomotor
 
 async def main():
     emotion_client = await display_emotions.get_client()
@@ -15,6 +16,7 @@ async def main():
         if (e == "waiting"):
             continue
         await display_emotions.display_emotion(emotion_client, emotion_char, e)
+        servomotor.move_by_emotion(e)
         await asyncio.sleep(2)
     
     emotion.cleanup_camera(camera)

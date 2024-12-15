@@ -1,4 +1,5 @@
 import time
+import config
 from adafruit_servokit import ServoKit
 
 kit = ServoKit(channels=16)
@@ -17,11 +18,20 @@ def rotate_servo(channel, angle, speed):
     kit.continuous_servo[channel].throttle = 0
    
 
+def move_by_emotion(emotion):
+    if (emotion not in config.movements.keys()):
+        return
+    for angle in config.movements[emotion]:
+        rotate_servo(15, angle, 1)
+
 try:
     rotate_servo(15, 180, 1)  
     rotate_servo(15, -180, 1)  
     rotate_servo(15, 180, 1)  
     rotate_servo(15, -180, 1)  
+
+
+
 
     rotate_servo(7, 53, 0.5)  
     rotate_servo(7, -45, 0.5)

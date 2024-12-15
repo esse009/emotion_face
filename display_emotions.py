@@ -103,8 +103,7 @@ async def write_start_data(client, characteristic):
 
 async def display_emotion(client, characteristic, emotion):
     global event
-    if (emotion not in config.emotions.keys()):
-        return
+
     await write_start_data(client, characteristic)
     for payload in config.emotions[emotion]:
        await client.write_gatt_char(characteristic, bytes.fromhex(payload), True)
