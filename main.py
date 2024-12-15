@@ -15,7 +15,7 @@ async def main():
         if (e == "waiting"):
             continue
         await display_emotions.display_emotion(emotion_client, emotion_char, e)
-        await asyncio.sleep(10)
+        await asyncio.sleep(2)
     
     emotion.cleanup_camera(camera)
 

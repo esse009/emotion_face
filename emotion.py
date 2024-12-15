@@ -21,7 +21,7 @@ def get_emotion(camera, classifier):
     frame = camera.capture_array()
     faces = classifier.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     if (len(faces) == 0):
-        return "waiting"
+        return "neutral"
     # We only analyse one face or we would get confused
     (x, y, w, h) = faces[0]
     # Extract the face ROI (Region of Interest)
