@@ -19,6 +19,10 @@ async def rotate_servo(channel, angle, speed):
     kit.continuous_servo[channel].throttle = 0
    
 
+def stop_servos():
+    kit.continuous_servo[7].throttle = 0
+    kit.continuous_servo[15].throttle = 0
+
 async def move_by_emotion(emotion):
     if (emotion not in config.movements.keys()):
         return
