@@ -36,7 +36,7 @@ def calculate_additional_response(received_data, default_first_byte="17"):
     # Construct response additional data
     first_byte = default_first_byte  # Default fixed first byte (can be adjusted dynamically)
     fourth_byte = "00"               # Fixed trailing byte
-    response_additional_data = first_byte + second_byte_response_hex + third_byte_response_hex + fourth_byte
+    response_additional_data = first_byte + str(second_byte_response_hex) + str(third_byte_response_hex) + fourth_byte
 
     return response_additional_data
 
@@ -58,7 +58,8 @@ response = ""
 
 def callback(sender, data: bytearray):
     # global response
-    global res
+    global response
+    print(binascii.hexlify(data))
     response = generate_response_for_handshake(binascii.hexlify(data))
    
 
@@ -74,7 +75,6 @@ async def get_characteristic(client):
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
     asyncio.sleep(5.0)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
-    print(response)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
     return interaction_characteristic
 
