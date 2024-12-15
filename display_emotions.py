@@ -64,7 +64,6 @@ def callback(sender, data: bytearray):
     processed = True
     str_data = ''.join(format(x, '02x') for x in data)
     print("data: " + str_data)
-    print("l")
     response = generate_response_for_handshake(str_data)
    
 
@@ -80,6 +79,7 @@ async def get_characteristic(client):
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
     asyncio.sleep(5.0)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
+    print(response)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
     return interaction_characteristic
 
