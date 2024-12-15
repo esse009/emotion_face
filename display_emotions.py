@@ -85,6 +85,7 @@ async def get_characteristic(client):
     asyncio.sleep(5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
     print(response)
+    asyncio.sleep(5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(magic_string), True)
     print(magic_string)
     return interaction_characteristic
