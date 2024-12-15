@@ -86,7 +86,6 @@ async def get_characteristic(client):
     await asyncio.sleep(5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
     await display_neutral(client, interaction_characteristic)
-    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
     return interaction_characteristic
 
 async def display_neutral(client, characteristic):
