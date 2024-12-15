@@ -59,7 +59,7 @@ response = ""
 def callback(sender, data: bytearray):
     # global response
     global response
-    print(binascii.hexlify(data))
+    print(str(binascii.hexlify(data)))
     response = generate_response_for_handshake(str(binascii.hexlify(data)))
    
 
