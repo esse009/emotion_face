@@ -63,6 +63,7 @@ def callback(sender, data: bytearray):
     global response, processed, magic_string
     if (processed): 
         magic_string = ''.join(format(x, '02x') for x in data)
+        print(magic_string)
         return
     processed = True
     str_data = ''.join(format(x, '02x') for x in data)
