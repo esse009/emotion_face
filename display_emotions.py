@@ -57,7 +57,7 @@ def generate_response_for_handshake(received_data):
 
 response = ""
 processed = False
-event = threading.Event()
+event = asyncio.Event()
 def callback(sender, data: bytearray):
     # global response
     global response, processed, event
@@ -82,10 +82,10 @@ async def get_characteristic(client):
     event.clear()
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("04000580"), True)
     # wait until we get back a response
-    event.wait()
+    await event.wait()
     event.clear()
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
-    event.wait()
+    await event.wait()
     await display_angry(client, interaction_characteristic)
     return interaction_characteristic
 
@@ -95,7 +95,7 @@ async def write_start_data(client, characteristic):
     # set mode to image
     event.clear()
     await client.write_gatt_char(characteristic, bytes.fromhex("0500040101"), True)
-    event.wait()
+    await event.wait()
     # this seems to represent the image index, as this gets incremented, hardcoded for now
     await client.write_gatt_char(characteristic, bytes.fromhex("07000880010011"), True)
 
