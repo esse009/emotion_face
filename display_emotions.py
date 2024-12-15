@@ -56,11 +56,14 @@ def generate_response_for_handshake(received_data):
 
 response = ""
 processed = False
+magic_string = ""
 
 def callback(sender, data: bytearray):
     # global response
-    global response, processed
-    if (processed): return
+    global response, processed, magic_string
+    if (processed): 
+        magic_string = ''.join(format(x, '02x') for x in data)
+        return
     processed = True
     str_data = ''.join(format(x, '02x') for x in data)
     print("data: " + str_data)
@@ -68,7 +71,7 @@ def callback(sender, data: bytearray):
    
 
 async def get_characteristic(client):
-    global response
+    global response, magic_string
 
     interaction_service = client.services.get_service('00FA')
     interaction_characteristic = interaction_service.get_characteristic('FA02')
@@ -81,7 +84,7 @@ async def get_characteristic(client):
     asyncio.sleep(1)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
     print(response)
-    await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
+    await client.write_gatt_char(interaction_characteristic, bytes.fromhex(magic_string), True)
     return interaction_characteristic
 
 async def display_neutral(client, characteristic):
