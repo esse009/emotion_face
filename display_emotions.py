@@ -60,7 +60,8 @@ def callback(sender, data: bytearray):
     # global response
     global response
     str_data = ''.join(format(x, '02x') for x in data)
-    print(str_data)
+    print("data: " + str_data)
+    print("l")
     response = generate_response_for_handshake(str_data)
    
 
