@@ -82,7 +82,7 @@ async def get_characteristic(client):
     await asyncio.sleep(5)
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
     await asyncio.sleep(5)
-    await display_neutral(client, interaction_characteristic)
+    await display_angry(client, interaction_characteristic)
     return interaction_characteristic
 
 
