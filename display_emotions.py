@@ -26,7 +26,7 @@ def calculate_additional_response(received_data, default_first_byte="17"):
     third_byte_received = int(received_data[4:6], 16)   # Extract '01' → 1 (hex to int)
 
     # Transform second and third bytes with example offsets (based on analysis)
-    second_byte_response = (second_byte_received + 33) % 256  # Example: Increment by 33
+    second_byte_response = (second_byte_received + 39) % 256  # Example: Increment by 39
     third_byte_response = (third_byte_received + 21) % 256    # Example: Increment by 21
 
     # Convert back to hex and pad with leading zeros
