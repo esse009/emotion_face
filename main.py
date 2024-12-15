@@ -7,7 +7,7 @@ async def main():
     emotion_client = await display_emotions.get_client()
     emotion_char = await display_emotions.get_characteristic(emotion_client)
     await display_emotions.display_happy(emotion_client, emotion_char)
-    time.sleep(10)
+    asyncio.sleep(10)
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
 
