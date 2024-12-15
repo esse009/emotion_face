@@ -5,7 +5,7 @@ import asyncio
 
 kit = ServoKit(channels=16)
 
-async def rotate_servo(channel, angle, speed):
+def rotate_servo(channel, angle, speed):
 
     rotation_rate = 360  
     rotation_time = abs(angle) / (rotation_rate * abs(speed))  
@@ -13,7 +13,7 @@ async def rotate_servo(channel, angle, speed):
 
     throttle = speed if angle > 0 else -speed
     kit.continuous_servo[channel].throttle = throttle
-    await asyncio.sleep(rotation_time)  
+    time.sleep(rotation_time)  
 
     
     kit.continuous_servo[channel].throttle = 0
