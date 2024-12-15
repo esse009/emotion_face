@@ -18,7 +18,7 @@ async def main():
             await asyncio.sleep(2)
     except:
         pass
-    servomotor.stop_servos()
+    servomotor.stop_servos() 
     emotion.cleanup_camera(camera)
 
 if __name__ == "__main__":
