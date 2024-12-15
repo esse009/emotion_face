@@ -24,6 +24,6 @@ emotions = {
 
 movements = {
     "neutral": [
-        180, -180, 90
+        180, -180
     ]
 }

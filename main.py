@@ -13,10 +13,8 @@ async def main():
 
     while True:
         e = emotion.get_emotion(camera, classifier)
-        if (e == "waiting"):
-            continue
         await display_emotions.display_emotion(emotion_client, emotion_char, e)
-        servomotor.move_by_emotion(e)
+        await servomotor.move_by_emotion(e)
         await asyncio.sleep(2)
     
     emotion.cleanup_camera(camera)
