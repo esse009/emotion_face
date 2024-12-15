@@ -7,7 +7,7 @@ from picamera2 import Picamera2
 def get_camera():
     picam2 = Picamera2()
     picam2.configure(picam2.create_video_configuration(main={"format": 'RGB888',
-                                                            "size": (640, 480)}))
+                                                            "size": (1920, 1080)}))
     picam2.start()
     return picam2
 

@@ -64,7 +64,6 @@ def callback(sender, data: bytearray):
     global response, processed, event
     event.set()
     if (processed): 
-        print(''.join(format(x, '02x') for x in data))
         return
     processed = True
     str_data = ''.join(format(x, '02x') for x in data)
@@ -88,7 +87,7 @@ async def get_characteristic(client):
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex(response), True)
     await event.wait()
 
-    # This seems to clear the screen
+    # Clear the screen
     event.clear()
     await client.write_gatt_char(interaction_characteristic, bytes.fromhex("0500040101"), True)
     await event.wait()
