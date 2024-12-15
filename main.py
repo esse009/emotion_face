@@ -6,7 +6,6 @@ import time
 async def main():
     emotion_client = await display_emotions.get_client()
     emotion_char = await display_emotions.get_characteristic(emotion_client)
-    await display_emotions.display_surprise(emotion_client, emotion_char)
     await asyncio.sleep(10)
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
