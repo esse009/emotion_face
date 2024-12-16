@@ -5,6 +5,8 @@ import asyncio
 
 kit = ServoKit(channels=16)
 
+
+
 async def rotate_servo(channel, angle, speed):
 
     rotation_rate = 360  
@@ -26,8 +28,8 @@ def stop_servos():
 async def move_by_emotion(emotion):
     if (emotion not in config.movements.keys()):
         return
-    for angle in config.movements[emotion]:
-        await rotate_servo(15, angle, 1)
+    for movement in config.movements[emotion]:
+        await rotate_servo(movement.direction, movement.angle, movement.speed)
 
 # try:
 #     rotate_servo(15, 180, 1)  
