@@ -27,3 +27,7 @@ movements = {
         180, -180
     ]
 }
+
+dialuge = {
+    "happy":
+}
