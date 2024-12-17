@@ -1,5 +1,5 @@
 import asyncio
-import display_emotions
+#import display_emotions
 import emotion
 import time
 import os
@@ -122,7 +122,7 @@ async def play_audio_after_delay():
     servomotor.rotate_servo(config.VERTICAL, -30, 0.5)
 
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
     # if want to play video version
-    asyncio.run(main_video())
+    #asyncio.run(main_video())
     # asyncio.run(main())
