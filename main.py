@@ -293,7 +293,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
     await display_emotions.display_emotion(client, char, "neutral")
     await asyncio.sleep(1)
-    await display_emotions.display_emotion(client, char, "happy")
+    await display_emotions.display_emotion(client, char, "exciting")
     await play_audio("/home/esse/Documents/audio/go.wav")
 
 if __name__ == "__main__":
