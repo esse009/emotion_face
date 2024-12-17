@@ -11,6 +11,10 @@ def rotate_servo_to_45():
     time.sleep(1)  # 等待1秒，确保舵机完成旋转
     print("Rotation complete.")
 
+def stop_servos():
+
+    kit.continuous_servo[15].throttle = 0
+
 # 主程序
 if __name__ == "__main__":
     try:
