@@ -147,13 +147,19 @@ async def play_audio_after_delay():
     await asyncio.sleep(57)  # Wait for 7 seconds
     os.system("aplay '/home/esse/Documents/audio/exithighway.wav'")  # Replace with your audio file path
      #left 20 degree, wait 1s, right 20 degree (half speed) 
+    await display_emotions.display_emotion(client, char, "happy")
+    servomotor.rotate_servo(config.HORIZONTAL, 20, 0.5)
+    await asyncio.sleep(1)
+    servomotor.rotate_servo(config.HORIZONTAL, -20, 0.5)
 
 
 #shut down
 async def play_audio_after_delay():
     await asyncio.sleep(45)  # Wait for 7 seconds
     os.system("aplay '/home/esse/Documents/audio/thanks.wav'")  # Replace with your audio file path
+    await display_emotions.display_emotion(client, char, "happy")
     # down 15 degree
+    servomotor.rotate_servo(config.VERTICAL, -30, 0.5)
 
 
 if __name__ == "__main__":
