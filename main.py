@@ -4,6 +4,7 @@ import emotion
 import time
 import os
 import servomotor
+from adafruit_servokit import ServoKit
 import config
 
 #reset
