@@ -19,7 +19,7 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
     if (e in config.dialogue):
         os.system("aplay " + config.dialogue[e])  # Replace with your audio file path
         await asyncio.sleep(2)
-        
+
 
 # async def main():
 #     emotion_client = await display_emotions.get_client()
@@ -89,7 +89,7 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
     #audio
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
     #left 20 degree, wait 1s, right 20 degree (half speed) 
-    servomotor.rotate_servo(config.HORIZONTALL, 20, 0.5)
+    servomotor.rotate_servo(config.HORIZONTAL, 20, 0.5)
     await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(1)
     servomotor.rotate_servo(config.HORIZONTAL, -20, 0.5)
