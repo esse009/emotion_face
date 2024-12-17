@@ -8,7 +8,7 @@ kit = ServoKit(channels=16)
 def rotate_servo_to_45():
     print("Rotating servo on channel 15 to 45 degrees...")
     kit.servo[15].angle = 45  # 将15号接口的舵机角度设置为45度
-    time.sleep(1)  # 等待1秒，确保舵机完成旋转
+    time.sleep(0.5)  # 等待1秒，确保舵机完成旋转
 
     # 停止舵机
     print("Stopping servo...")
