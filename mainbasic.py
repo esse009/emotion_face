@@ -1,5 +1,5 @@
 import asyncio
-#import display_emotions
+import display_emotions
 import emotion
 import time
 import os
