@@ -1,0 +1,1 @@
+source .venv/bin/activate && git pull && ./wifi.sh && python3 main.py
