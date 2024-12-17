@@ -4,7 +4,6 @@ import emotion
 import time
 import os
 import servomotor
-from adafruit_servokit import ServoKit
 import config
 
 #reset
@@ -20,6 +19,7 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
     if (e in config.dialogue):
         os.system("aplay " + config.dialogue[e])  # Replace with your audio file path
         await asyncio.sleep(2)
+        
 
 # async def main():
 #     emotion_client = await display_emotions.get_client()
