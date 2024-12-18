@@ -46,7 +46,7 @@ movements = {
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
-    "interval": 1  # 间隔1秒
+    
 },
 "surprise": {
     "actions": [
@@ -54,27 +54,27 @@ movements = {
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
-    "interval": 1  # 间隔1秒
+    
 },
 "sad": {
     "actions": [
         {"direction": VERTICAL, "angle": 20, "speed": 0.5},
     ],
-    "interval": 0  # 间隔1秒
+    
 },
 "angry": {
      "actions": [
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
-    "interval": 1  # 间隔1秒
+    
 },
 "fear": {
      "actions": [
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
-    "interval": 1  # 间隔1秒
+    
 },
 }
 
