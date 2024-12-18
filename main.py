@@ -43,8 +43,8 @@ async def main_video():
     classifier = emotion.get_classifier()
     try:
       await play_audio_after_delay_welcome(emotion_client, emotion_char, camera, classifier)
-    except:
-        pass
+    except Exception as e:
+        print (e)
     servomotor.stop_servos() 
     emotion.cleanup_camera(camera)
 
