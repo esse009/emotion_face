@@ -41,41 +41,38 @@ emotions = {
 }
 
 movements = {
-"happy": {
-    "actions": [
+"happy": 
+    [
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
     
-},
-"surprise": {
-    "actions": [
+
+"surprise": 
+    [
         {"direction": VERTICAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
     
-},
-"sad": {
-    "actions": [
+
+"sad":
+     [
         {"direction": VERTICAL, "angle": 20, "speed": 0.5},
     ],
     
-},
-"angry": {
-     "actions": [
+"angry": 
+     [
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
     
-},
-"fear": {
-     "actions": [
+"fear": 
+    [
         {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
         {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
     ],
-    
-},
+
 }
 
 dialogue = {
