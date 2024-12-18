@@ -42,7 +42,7 @@ async def move_by_emotion(emotion):
     if (emotion not in config.movements.keys()):
         return
     for movement in config.movements[emotion]:
-        await rotate_servo(movement.direction, movement.angle, movement.speed)
+        await rotate_servo(movement["direction"], movement["angle"], movement["speed"])
 
 # try:
 #     rotate_servo(15, 180, 1)  
