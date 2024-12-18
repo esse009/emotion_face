@@ -43,6 +43,7 @@ async def main_video():
     classifier = emotion.get_classifier()
     try:
       await play_audio_after_delay_welcome(emotion_client, emotion_char, camera, classifier)
+      await play_audio_after_delay_enter_highway(emotion_client, emotion_char, camera, classifier)
     except Exception as e:
         raise
     servomotor.stop_servos() 
