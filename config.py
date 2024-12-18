@@ -76,10 +76,10 @@ movements = {
 }
 
 dialogue = {
-    "happy": ["./audio/dhappy.wav"],
-    "surprise": ["./audio/dsurprise.wav"],
-    "sad": ["./audio/dsad.wav"],
-    "angry": ["./audio/dangry.wav"],
-    "fear": ["./audio/dfear.wav"],
-    "disgust": ["./audio/ddisgust.wav"],
+    "happy": "./audio/dhappy.wav",
+    "surprise": "./audio/dsurprise.wav",
+    "sad": "./audio/dsad.wav",
+    "angry": "./audio/dangry.wav",
+    "fear": "./audio/dfear.wav",
+    "disgust": "./audio/ddisgust.wav",
 }
