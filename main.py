@@ -52,6 +52,17 @@ async def main_video():
 #welcome
 #emotional feedback only once per scenario
 async def play_audio_after_delay_welcome(client, char, camera, classifier):
+   
+    #audio
+    os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
+    #up 15 degree`
+    await servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
+    # exppressions: neutral-exciting
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(1)
+    await display_emotions.display_emotion(client, char, "exciting")
+    os.system("aplay '/home/esse/Documents/audio/go.wav'")
+
     time = 0
     displayed_once = False
     while (time < 7):
@@ -63,15 +74,6 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
         await display_emotions.display_emotion(client, char, e)
         await asyncio.sleep(min(7 - time, 2))
         time += 2
-    #audio
-    os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
-    #up 15 degree`
-    servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
-    # exppressions: neutral-exciting
-    await display_emotions.display_emotion(client, char, "neutral")
-    await asyncio.sleep(1)
-    await display_emotions.display_emotion(client, char, "exciting")
-    os.system("aplay '/home/esse/Documents/audio/go.wav'")
 
 #enter highway
 #emotional feedback only once per scenario
