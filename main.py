@@ -173,6 +173,7 @@ async def play_audio_after_delay_construction(client, char, camera, classifier):
     # left 20 degree, wait 1.5s, right 20 degree (half speed) 
     await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
     await asyncio.sleep(0.5)
+    await display_emotions.display_emotion(client, char, "surprise")
     await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
     await asyncio.sleep(1)
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
