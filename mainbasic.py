@@ -39,14 +39,14 @@ async def main_video():
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
     try:
-    #   await play_audio_after_delay_welcome(emotion_client, emotion_char)
+      await play_audio_after_delay_welcome(emotion_client, emotion_char)
       await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
-    #   await play_audio_after_delay_speed_report(emotion_client, emotion_char)
-    #   await play_audio_after_delay_overtaking(emotion_client, emotion_char)
-    #   await play_audio_after_delay_construction(emotion_client, emotion_char)
-    #   await play_audio_after_delay_traffic_jam(emotion_client, emotion_char)
-    #   await play_audio_after_delay_exit_highway(emotion_client, emotion_char)
-    #   await play_audio_after_delay_thanks(emotion_client, emotion_char)
+      await play_audio_after_delay_speed_report(emotion_client, emotion_char)
+      await play_audio_after_delay_overtaking(emotion_client, emotion_char)
+      await play_audio_after_delay_construction(emotion_client, emotion_char)
+      await play_audio_after_delay_traffic_jam(emotion_client, emotion_char)
+      await play_audio_after_delay_exit_highway(emotion_client, emotion_char)
+      await play_audio_after_delay_thanks(emotion_client, emotion_char)
     except Exception as e:
         raise
     servomotor.stop_servos() 
