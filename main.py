@@ -199,6 +199,7 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
     #audio
     os.system("aplay '/home/esse/Documents/audio/jam.wav'")  # Replace with your audio file path
     #down 30 degree
+    await display_emotions.display_emotion(client, char, "sadness")
     # left 20 degree, wait 1s, right 20 degree (half speed) 
     # up 15 degree
     await servomotor.rotate_servo(config.VERTICAL, 50, 0.5)
