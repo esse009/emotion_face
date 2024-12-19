@@ -40,13 +40,13 @@ async def main_video():
     classifier = emotion.get_classifier()
     try:
       await play_audio_after_delay_welcome(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_enter_highway(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_speed_report(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_overtaking(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_construction(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_traffic_jam(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_exit_highway(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_thanks(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_enter_highway(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_speed_report(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_overtaking(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_construction(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_traffic_jam(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_exit_highway(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_thanks(emotion_client, emotion_char, camera, classifier)
     except Exception as e:
         raise
     servomotor.stop_servos() 
@@ -57,6 +57,13 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #horizonal 15 degree, wake up
     # await servomotor.rotate_servo(config.VERTICAL, 70, 0.5)
     await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
+
+    await asyncio.sleep(1)
+    await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
+    await display_emotions.display_emotion(client, char, "happy")
+    await asyncio.sleep(1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
+    
      # exppressions: neutral-exciting
     await display_emotions.display_emotion(client, char, "happy")
     #audio
@@ -241,7 +248,7 @@ async def play_audio_after_delay_thanks(client, char, camera, classifier):
     #happy
     await display_emotions.display_emotion(client, char, "happy")
     # down 15 degree
-    await servomotor.rotate_servo(config.VERTICAL, 50, 0.5)
+    await servomotor.rotate_servo(config.VERTICAL, 50, 1)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
