@@ -38,6 +38,18 @@ async def main_video():
     emotion_char = await display_emotions.get_characteristic(emotion_client)
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
+
+    async def measure_time(task, *args, **kwargs):
+        start_time = time.time()
+        try:
+            await task(*args, **kwargs)
+        except Exception as e:
+            print(f"Error in task {task.__name__}: {e}")
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Task {task.__name__} took {elapsed_time:.2f} seconds to complete.")
+
+
     try:
       await play_audio_after_delay_welcome(emotion_client, emotion_char)
       await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
