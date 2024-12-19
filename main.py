@@ -82,7 +82,8 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
         time += 2
 
 #enter highway
-async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
+async def play_audio_after_delay_enter_highway(client, char):
+    # async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
     #audio
     await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
@@ -104,6 +105,15 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
     #     await display_emotions.display_emotion(client, char, e)
     #     await asyncio.sleep(min(41 - time, 2))
     #     time += 2
+    time = 0
+    while time < 41:
+        e = "neutral"
+        # 显示 neutral 表情
+        await display_emotions.display_emotion(client, char, e)
+        # 等待 2 秒或直到 41 秒为止
+        await asyncio.sleep(min(41 - time, 2))
+        time += 2
+
 
 #Speed report
 #emotional feedback only once per scenario
