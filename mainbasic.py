@@ -138,12 +138,12 @@ async def play_audio_after_delay_speed_report(client, char):
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
     time = 0
-    while time < 40:
+    while time < 39:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(40 - time, 2))
+        await asyncio.sleep(min(39 - time, 2))
         time += 2
 
 
@@ -193,12 +193,12 @@ async def play_audio_after_delay_construction(client, char):
     await servomotor.rotate_servo(config.VERTICAL, 50, 0.5)
     #emotional feedback only once per scenario
     time = 0
-    while time < 32:
+    while time < 24:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(32 - time, 2))
+        await asyncio.sleep(min(24 - time, 2))
         time += 2
 
 #traffic jam
@@ -219,12 +219,12 @@ async def play_audio_after_delay_traffic_jam(client, char):
     await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
     #emotional feedback only once per scenario
     time = 0
-    while time < 41:
+    while time < 53:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(41 - time, 2))
+        await asyncio.sleep(min(53 - time, 2))
         time += 2
 
 
@@ -259,15 +259,7 @@ async def play_audio_after_delay_thanks(client, char):
     os.system("aplay '/home/esse/Documents/audio/thanks.wav'")  # Replace with your audio file path
     # down 15 degree
     await servomotor.rotate_servo(config.VERTICAL, 70, 1)
-    #emotional feedback only once per scenario
-    time = 0
-    while time < 41:
-        e = "neutral"
-        # 显示 neutral 表情
-        await display_emotions.display_emotion(client, char, e)
-        # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(41 - time, 2))
-        time += 2
+    
 
 if __name__ == "__main__":
     # if want to play video version
