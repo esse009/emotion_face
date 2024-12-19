@@ -52,7 +52,7 @@ async def main_video():
     servomotor.stop_servos() 
     emotion.cleanup_camera(camera)
 
-#welcome 0-7s,7-16s IVA behavior, 16-18s none
+#welcome 0-7s none,7-16s IVA behavior, 16-43s none
 async def play_audio_after_delay_welcome(client, char):
     #horizonal 15 degree, wake up
     # await servomotor.rotate_servo(config.VERTICAL, 70, 0.5)
@@ -78,7 +78,7 @@ async def play_audio_after_delay_welcome(client, char):
         await asyncio.sleep(min(7 - time, 2))
         time += 2
 
-#enter highway
+#enter highway 43-55none, 
 async def play_audio_after_delay_enter_highway(client, char):
     # async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
     #audio
