@@ -85,9 +85,9 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
 async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
     #audio
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
+    await display_emotions.display_emotion(client, char, "happy")
     #left 20 degree, wait 1s, right 20 degree (half speed) 
     await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
-    await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(1)
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
