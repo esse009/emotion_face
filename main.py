@@ -57,10 +57,11 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #horizonal 15 degree, wake up
     # await servomotor.rotate_servo(config.VERTICAL, 70, 0.5)
     # await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
+     # exppressions: neutral-exciting
+    await display_emotions.display_emotion(client, char, "happy")
     #audio
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
     # exppressions: neutral-exciting
-    await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(1)
     #audio
     os.system("aplay '/home/esse/Documents/audio/go.wav'")
@@ -190,9 +191,8 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
     # left 20 degree, wait 1s, right 20 degree (half speed) 
     # up 15 degree
     await servomotor.rotate_servo(config.VERTICAL, -30, 0.5)
-    await  servomotor.rotate_servo(config.HORIZONTAL, 60, 1)
-    await asyncio.sleep(1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -60, 1)
+    await  servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     await servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
     #emotional feedback only once per scenario
     time = 0
