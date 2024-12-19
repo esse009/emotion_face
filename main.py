@@ -55,7 +55,7 @@ async def main_video():
 #welcome
 async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #horizonal 15 degree, wake up
-    await servomotor.rotate_servo(config.VERTICAL, 20, 0.5)
+    await servomotor.rotate_servo(config.VERTICAL, 40, 0.5)
     await servomotor.rotate_servo(config.VERTICAL, -20, 0.5)
     #audio
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
