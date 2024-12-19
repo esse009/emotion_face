@@ -39,8 +39,8 @@ async def main_video():
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
     try:
-      await play_audio_after_delay_welcome(emotion_client, emotion_char)
-    #   await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
+    #   await play_audio_after_delay_welcome(emotion_client, emotion_char)
+      await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
     #   await play_audio_after_delay_speed_report(emotion_client, emotion_char)
     #   await play_audio_after_delay_overtaking(emotion_client, emotion_char)
     #   await play_audio_after_delay_construction(emotion_client, emotion_char)
@@ -58,7 +58,6 @@ async def play_audio_after_delay_welcome(client, char):
     # await servomotor.rotate_servo(config.VERTICAL, 70, 0.5)
     await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
     await display_emotions.display_emotion(client, char, "happy")
-    await asyncio.sleep(0.5)
     #audio
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
      # exppressions: neutral-exciting
