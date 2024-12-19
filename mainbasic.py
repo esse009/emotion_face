@@ -56,7 +56,7 @@ async def main_video():
       await play_audio_after_delay_speed_report(emotion_client, emotion_char)
       await play_audio_after_delay_overtaking(emotion_client, emotion_char)
       await play_audio_after_delay_construction(emotion_client, emotion_char)
-    #   await play_audio_after_delay_traffic_jam(emotion_client, emotion_char)
+      await play_audio_after_delay_traffic_jam(emotion_client, emotion_char)
     #   await play_audio_after_delay_exit_highway(emotion_client, emotion_char)
     #   await play_audio_after_delay_thanks(emotion_client, emotion_char)
 
@@ -154,7 +154,6 @@ async def play_audio_after_delay_overtaking(client, char):
     #audio
     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
     await display_emotions.display_emotion(client, char, "neutral")
-    await asyncio.sleep(1)
     await display_emotions.display_emotion(client, char, "exciting")
      #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
     await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
