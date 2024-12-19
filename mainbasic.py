@@ -39,19 +39,19 @@ async def main_video():
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
 
-    async def measure_time(task, *args, **kwargs):
-        start_time = time.time()
-        try:
-            await task(*args, **kwargs)
-        except Exception as e:
-            print(f"Error in task {task.__name__}: {e}")
-        end_time = time.time()
-        elapsed_time = end_time - start_time
-        print(f"Task {task.__name__} took {elapsed_time:.2f} seconds to complete.")
+    # async def measure_time(task, *args, **kwargs):
+    #     start_time = time.time()
+    #     try:
+    #         await task(*args, **kwargs)
+    #     except Exception as e:
+    #         print(f"Error in task {task.__name__}: {e}")
+    #     end_time = time.time()
+    #     elapsed_time = end_time - start_time
+    #     print(f"Task {task.__name__} took {elapsed_time:.2f} seconds to complete.")
 
 
     try:
-    #   await play_audio_after_delay_welcome(emotion_client, emotion_char)
+      await play_audio_after_delay_welcome(emotion_client, emotion_char)
     #   await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
     #   await play_audio_after_delay_speed_report(emotion_client, emotion_char)
     #   await play_audio_after_delay_overtaking(emotion_client, emotion_char)
@@ -60,14 +60,14 @@ async def main_video():
     #   await play_audio_after_delay_exit_highway(emotion_client, emotion_char)
     #   await play_audio_after_delay_thanks(emotion_client, emotion_char)
 
-      await measure_time(play_audio_after_delay_welcome, emotion_client, emotion_char)  
-      await measure_time(play_audio_after_delay_enter_highway, emotion_client, emotion_char)
-      await measure_time(play_audio_after_delay_speed_report, emotion_client, emotion_char)
-      await measure_time(play_audio_after_delay_overtaking, emotion_client, emotion_char)
-      await measure_time(play_audio_after_delay_construction, emotion_client, emotion_char)
-      await measure_time(play_audio_after_delay_traffic_jam, emotion_client, emotion_char)
-      await measure_time(play_audio_after_delay_exit_highway, emotion_client, emotion_char)
-      await measure_time(play_audio_after_delay_thanks, emotion_client, emotion_char)
+    #   await measure_time(play_audio_after_delay_welcome, emotion_client, emotion_char)  
+    #   await measure_time(play_audio_after_delay_enter_highway, emotion_client, emotion_char)
+    #   await measure_time(play_audio_after_delay_speed_report, emotion_client, emotion_char)
+    #   await measure_time(play_audio_after_delay_overtaking, emotion_client, emotion_char)
+    #   await measure_time(play_audio_after_delay_construction, emotion_client, emotion_char)
+    #   await measure_time(play_audio_after_delay_traffic_jam, emotion_client, emotion_char)
+    #   await measure_time(play_audio_after_delay_exit_highway, emotion_client, emotion_char)
+    #   await measure_time(play_audio_after_delay_thanks, emotion_client, emotion_char)
     except Exception as e:
         raise
     servomotor.stop_servos() 
@@ -91,12 +91,12 @@ async def play_audio_after_delay_welcome(client, char):
     await asyncio.sleep(1)
     #emotional feedback only once per scenario
     time = 0
-    while time < 7:
+    while time < 27:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(7 - time, 2))
+        await asyncio.sleep(min(27 - time, 2))
         time += 2
 
 #enter highway 43-55none, 
