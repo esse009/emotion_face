@@ -52,7 +52,7 @@ async def main_video():
 
     try:
       await play_audio_after_delay_welcome(emotion_client, emotion_char)
-    #   await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
+      await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
     #   await play_audio_after_delay_speed_report(emotion_client, emotion_char)
     #   await play_audio_after_delay_overtaking(emotion_client, emotion_char)
     #   await play_audio_after_delay_construction(emotion_client, emotion_char)
@@ -94,12 +94,12 @@ async def play_audio_after_delay_welcome(client, char):
     await asyncio.sleep(1)
     #emotional feedback only once per scenario
     time = 0
-    while time < 27:
+    while time < 38:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(27 - time, 2))
+        await asyncio.sleep(min(38 - time, 2))
         time += 2
 
 #enter highway 43-55none, 
