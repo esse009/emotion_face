@@ -52,7 +52,7 @@ async def main_video():
     servomotor.stop_servos() 
     emotion.cleanup_camera(camera)
 
-#welcome 0-7,7-16 IVA behavior, 16-18 none
+#welcome 0-7s,7-16s IVA behavior, 16-18s none
 async def play_audio_after_delay_welcome(client, char):
     #horizonal 15 degree, wake up
     # await servomotor.rotate_servo(config.VERTICAL, 70, 0.5)
@@ -83,7 +83,6 @@ async def play_audio_after_delay_enter_highway(client, char):
     # async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
     #audio
     await display_emotions.display_emotion(client, char, "happy")
-    await asyncio.sleep(1)
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
     await display_emotions.display_emotion(client, char, "happy")
     #left 20 degree, wait 1s, right 20 degree (half speed) 
