@@ -40,7 +40,7 @@ async def main_video():
     classifier = emotion.get_classifier()
     try:
     #   await play_audio_after_delay_welcome(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
+      await play_audio_after_delay_enter_highway(emotion_client, emotion_char, camera, classifier)
     #   await play_audio_after_delay_speed_report(emotion_client, emotion_char, camera, classifier)
     #   await play_audio_after_delay_overtaking(emotion_client, emotion_char, camera, classifier)
     #   await play_audio_after_delay_construction(emotion_client, emotion_char, camera, classifier)
@@ -82,8 +82,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
         time += 2
 
 #enter highway
-async def play_audio_after_delay_enter_highway(client, char):
-    # async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
+async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
     #audio
     await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
@@ -93,26 +92,19 @@ async def play_audio_after_delay_enter_highway(client, char):
     await asyncio.sleep(1)
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
-    # await asyncio.sleep(5)
-    # time = 0
-    # displayed_once = False
-    # while (time < 41):
-    #     e = "neutral"
-    #     if (not displayed_once):
-    #         e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
-    #     if (e != "neutral"):
-    #         displayed_once = True
-    #     await display_emotions.display_emotion(client, char, e)
-    #     await asyncio.sleep(min(41 - time, 2))
-    #     time += 2
+    await asyncio.sleep(5)
     time = 0
-    while time < 41:
+    displayed_once = False
+    while (time < 41):
         e = "neutral"
-        # 显示 neutral 表情
+        if (not displayed_once):
+            e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
+        if (e != "neutral"):
+            displayed_once = True
         await display_emotions.display_emotion(client, char, e)
-        # 等待 2 秒或直到 41 秒为止
         await asyncio.sleep(min(41 - time, 2))
         time += 2
+
 
 
 #Speed report
@@ -286,55 +278,4 @@ if __name__ == "__main__":
     # asyncio.run(main())
 
 
-# import asyncio
-# import display_emotions
-# import emotion
-# import os
-# import servomotor
-# import config
-# import subprocess
 
-# async def play_audio(file_path):
-#     if os.path.exists(file_path):
-#         process = await asyncio.create_subprocess_exec('aplay', file_path)
-#         await process.wait()
-#     else:
-#         print(f"Audio file not found: {file_path}")
-
-# async def perform_detection(camera, classifier, client, char, ignore_neutral=False):
-#     e = emotion.get_emotion(camera, classifier)
-#     if ignore_neutral and e == "neutral":
-#         return "neutral"
-#     await display_emotions.display_emotion(client, char, e)
-#     servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
-#     return e
-
-# async def main_video():
-#     emotion_client = await display_emotions.get_client()
-#     emotion_char = await display_emotions.get_characteristic(emotion_client)
-#     camera = emotion.get_camera()
-#     classifier = emotion.get_classifier()
-
-#     if not camera or not classifier:
-#         print("Camera or classifier initialization failed!")
-#         return
-
-#     try:
-#         await play_audio_after_delay_welcome(emotion_client, emotion_char, camera, classifier)
-#     except Exception as e:
-#         print(f"Error: {e}")
-#     finally:
-#         servomotor.stop_servos()
-#         emotion.cleanup_camera(camera)
-
-# async def play_audio_after_delay_welcome(client, char, camera, classifier):
-#     await asyncio.sleep(7)
-#     await play_audio("/home/esse/Documents/audio/welcome.wav")
-#     servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
-#     await display_emotions.display_emotion(client, char, "neutral")
-#     await asyncio.sleep(1)
-#     await display_emotions.display_emotion(client, char, "exciting")
-#     await play_audio("/home/esse/Documents/audio/go.wav")
-
-# if __name__ == "__main__":
-#     asyncio.run(main_video())
