@@ -226,6 +226,7 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
 #emotional feedback only once per scenario
 async def play_audio_after_delay_exit_highway(client, char, camera, classifier):
     #audio
+    await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/exithighway.wav'")  # Replace with your audio file path
     await display_emotions.display_emotion(client, char, "happy")
     #left 20 degree, wait 1s, right 20 degree (half speed) 
