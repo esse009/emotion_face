@@ -133,6 +133,7 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
 #overtaking
 
 async def play_audio_after_delay_overtaking(client, char, camera, classifier):
+    await display_emotions.display_emotion(client, char, "neutral")
     #audio
     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
     await display_emotions.display_emotion(client, char, "neutral")
@@ -145,6 +146,7 @@ async def play_audio_after_delay_overtaking(client, char, camera, classifier):
     await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
     await asyncio.sleep(7.5)  # Wait for 7 seconds
     os.system("aplay '/home/esse/Documents/audio/nice.wav'")  # Replace with your audio file path
+    await display_emotions.display_emotion(client, char, "exciting")
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
