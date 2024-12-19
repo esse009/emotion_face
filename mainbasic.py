@@ -54,7 +54,7 @@ async def main_video():
       await play_audio_after_delay_welcome(emotion_client, emotion_char)
       await play_audio_after_delay_enter_highway(emotion_client, emotion_char)
       await play_audio_after_delay_speed_report(emotion_client, emotion_char)
-    #   await play_audio_after_delay_overtaking(emotion_client, emotion_char)
+      await play_audio_after_delay_overtaking(emotion_client, emotion_char)
     #   await play_audio_after_delay_construction(emotion_client, emotion_char)
     #   await play_audio_after_delay_traffic_jam(emotion_client, emotion_char)
     #   await play_audio_after_delay_exit_highway(emotion_client, emotion_char)
@@ -138,12 +138,12 @@ async def play_audio_after_delay_speed_report(client, char):
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
     time = 0
-    while time < 41:
+    while time < 23:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(41 - time, 2))
+        await asyncio.sleep(min(23 - time, 2))
         time += 2
 
 
