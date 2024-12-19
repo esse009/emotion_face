@@ -60,8 +60,10 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #audio
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
     # exppressions: neutral-exciting
-    await display_emotions.display_emotion(client, char, "neutral")
+    await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(1)
+    #audio
+    os.system("aplay '/home/esse/Documents/audio/go.wav'")
     await display_emotions.display_emotion(client, char, "exciting")
     #audio
     os.system("aplay '/home/esse/Documents/audio/go.wav'")
@@ -83,10 +85,10 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
     #audio
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
     #left 20 degree, wait 1s, right 20 degree (half speed) 
-    await servomotor.rotate_servo(config.HORIZONTAL, 50, 0.5)
+    await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
     await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -50, 0.5)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
@@ -106,11 +108,11 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
     #audio
     os.system("aplay '/home/esse/Documents/audio/speedlimit.wav'")  # Replace with your audio file path
     #left 20 degree, wait 1.5s, right 20 degree (half speed) 
-    await servomotor.rotate_servo(config.HORIZONTAL, 50, 0.5)
+    await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
     #happy
     await display_emotions.display_emotion(client, char, "happy")
-    await asyncio.sleep(1.5)
-    await servomotor.rotate_servo(config.HORIZONTAL, -50, 0.5)
+    await asyncio.sleep(1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
@@ -134,10 +136,10 @@ async def play_audio_after_delay_overtaking(client, char, camera, classifier):
     await asyncio.sleep(1.5)
     await display_emotions.display_emotion(client, char, "exciting")
      #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
-    await servomotor.rotate_servo(config.HORIZONTAL, 30, 1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -30, 1)
-    await servomotor.rotate_servo(config.HORIZONTAL, 30, 1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -30, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, 60, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, 60, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 1)
     await asyncio.sleep(7.5)  # Wait for 7 seconds
     os.system("aplay '/home/esse/Documents/audio/nice.wav'")  # Replace with your audio file path
     #emotional feedback only once per scenario
@@ -164,9 +166,9 @@ async def play_audio_after_delay_construction(client, char, camera, classifier):
     #up 20 degree
     # left 20 degree, wait 1.5s, right 20 degree (half speed) 
     await servomotor.rotate_servo(config.VERTICAL, 20, 0.5)
-    await servomotor.rotate_servo(config.HORIZONTAL, 30, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, 60, 1)
     await asyncio.sleep(1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -30, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 1)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
@@ -190,9 +192,9 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
     # left 20 degree, wait 1s, right 20 degree (half speed) 
     # up 15 degree
     await servomotor.rotate_servo(config.VERTICAL, -30, 0.5)
-    await  servomotor.rotate_servo(config.HORIZONTAL, 30, 1)
+    await  servomotor.rotate_servo(config.HORIZONTAL, 60, 1)
     await asyncio.sleep(1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -30, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 1)
     await servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
     #emotional feedback only once per scenario
     time = 0
@@ -215,9 +217,9 @@ async def play_audio_after_delay_exit_highway(client, char, camera, classifier):
     os.system("aplay '/home/esse/Documents/audio/exithighway.wav'")  # Replace with your audio file path
     await display_emotions.display_emotion(client, char, "happy")
     #left 20 degree, wait 1s, right 20 degree (half speed) 
-    await servomotor.rotate_servo(config.HORIZONTAL, 50, 0.5)
+    await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
     await asyncio.sleep(1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -50, 0.5)
+    await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
