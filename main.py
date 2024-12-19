@@ -93,7 +93,7 @@ async def play_audio_after_delay_enter_highway(client, char):
     await asyncio.sleep(1)
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
-    await asyncio.sleep(5)
+    # await asyncio.sleep(5)
     # time = 0
     # displayed_once = False
     # while (time < 41):
