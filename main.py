@@ -52,7 +52,7 @@ async def main_video():
     servomotor.stop_servos() 
     emotion.cleanup_camera(camera)
 
-#welcome
+#welcome 0-7,7-16 IVA behavior, 16-18 none
 async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #horizonal 15 degree, wake up
     # await servomotor.rotate_servo(config.VERTICAL, 70, 0.5)
@@ -93,18 +93,17 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     #emotional feedback only once per scenario
     await asyncio.sleep(5)
-    print("here")
-    time = 0
-    displayed_once = False
-    while (time < 41):
-        e = "neutral"
-        if (not displayed_once):
-            e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
-        if (e != "neutral"):
-            displayed_once = True
-        await display_emotions.display_emotion(client, char, e)
-        await asyncio.sleep(min(41 - time, 2))
-        time += 2
+    # time = 0
+    # displayed_once = False
+    # while (time < 41):
+    #     e = "neutral"
+    #     if (not displayed_once):
+    #         e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
+    #     if (e != "neutral"):
+    #         displayed_once = True
+    #     await display_emotions.display_emotion(client, char, e)
+    #     await asyncio.sleep(min(41 - time, 2))
+    #     time += 2
 
 #Speed report
 #emotional feedback only once per scenario
