@@ -44,8 +44,8 @@ async def main_video():
     #   await play_audio_after_delay_speed_report(emotion_client, emotion_char, camera, classifier)
     #   await play_audio_after_delay_overtaking(emotion_client, emotion_char, camera, classifier)
     #   await play_audio_after_delay_construction(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_traffic_jam(emotion_client, emotion_char, camera, classifier)
-    #   await play_audio_after_delay_exit_highway(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_traffic_jam(emotion_client, emotion_char, camera, classifier)
+      await play_audio_after_delay_exit_highway(emotion_client, emotion_char, camera, classifier)
     #   await play_audio_after_delay_thanks(emotion_client, emotion_char, camera, classifier)
     except Exception as e:
         raise
