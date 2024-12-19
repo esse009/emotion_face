@@ -67,6 +67,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #audio
     os.system("aplay '/home/esse/Documents/audio/go.wav'")
     await display_emotions.display_emotion(client, char, "exciting")
+    await asyncio.sleep(1)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
@@ -105,6 +106,7 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
 #Speed report
 #emotional feedback only once per scenario
 async def play_audio_after_delay_speed_report(client, char, camera, classifier):
+    await display_emotions.display_emotion(client, char, "happy")
     #audio
     os.system("aplay '/home/esse/Documents/audio/speedlimit.wav'")  # Replace with your audio file path
     #left 20 degree, wait 1.5s, right 20 degree (half speed) 
@@ -159,10 +161,10 @@ async def play_audio_after_delay_overtaking(client, char, camera, classifier):
 #construction
 
 async def play_audio_after_delay_construction(client, char, camera, classifier):
-    #audio
-    os.system("aplay '/home/esse/Documents/audio/construction.wav'")  # Replace with your audio file path
     #surprise
     await display_emotions.display_emotion(client, char, "surprise")
+    #audio
+    os.system("aplay '/home/esse/Documents/audio/construction.wav'")  # Replace with your audio file path
     #up 20 degree
     # left 20 degree, wait 1.5s, right 20 degree (half speed) 
     await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
@@ -187,10 +189,10 @@ async def play_audio_after_delay_construction(client, char, camera, classifier):
 
 #traffic jam
 async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
-    #audio
-    os.system("aplay '/home/esse/Documents/audio/jam.wav'")  # Replace with your audio file path
     #sadness
     await display_emotions.display_emotion(client, char, "sadness")
+    #audio
+    os.system("aplay '/home/esse/Documents/audio/jam.wav'")  # Replace with your audio file path
     #down 30 degree
     # left 20 degree, wait 1s, right 20 degree (half speed) 
     # up 15 degree
