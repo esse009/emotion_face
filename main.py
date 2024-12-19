@@ -6,9 +6,6 @@ import os
 import servomotor
 import config
 
-#reset
-servomotor.rotate_servo(config.VERTICAL, 75, 1)
-
 
 async def perform_detection( camera, classifier, client, char, ignore_neutral = False):
     e = emotion.get_emotion(camera, classifier)
@@ -58,7 +55,8 @@ async def main_video():
 #welcome
 async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #horizonal 15 degree, wake up
-    await servomotor.rotate_servo(config.VERTICAL, 15, 0.5)
+    await servomotor.rotate_servo(config.VERTICAL, 20, 0.5)
+    await servomotor.rotate_servo(config.VERTICAL, -20, 0.5)
     #audio
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
     # exppressions: neutral-exciting
