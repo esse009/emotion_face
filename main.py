@@ -86,7 +86,7 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
     await servomotor.rotate_servo(config.HORIZONTAL, 50, 0.5)
     await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(1)
-    await servomotor.rotate_servo(config.HORIZONTAL, 50, 0.5)
+    await servomotor.rotate_servo(config.HORIZONTAL, -50, 0.5)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False

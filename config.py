@@ -43,16 +43,16 @@ emotions = {
 movements = {
 "happy": 
     [
-        {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
-        {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
+        {"direction": HORIZONTAL, "angle": 50, "speed": 0.5},
+        {"direction": HORIZONTAL, "angle": -50, "speed": 0.5}
     ],
     
 
 "surprise": 
     [
         {"direction": VERTICAL, "angle": 20, "speed": 0.5},
-        {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
-        {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
+        {"direction": HORIZONTAL, "angle": 50, "speed": 0.5},
+        {"direction": HORIZONTAL, "angle": -50, "speed": 0.5}
     ],
     
 
@@ -63,14 +63,14 @@ movements = {
     
 "angry": 
      [
-        {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
-        {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
+        {"direction": HORIZONTAL, "angle": 50, "speed": 0.5},
+        {"direction": HORIZONTAL, "angle": -50, "speed": 0.5}
     ],
     
 "fear": 
     [
-        {"direction": HORIZONTAL, "angle": 20, "speed": 0.5},
-        {"direction": HORIZONTAL, "angle": -20, "speed": 0.5}
+        {"direction": HORIZONTAL, "angle": 50, "speed": 0.5},
+        {"direction": HORIZONTAL, "angle": -50, "speed": 0.5}
     ],
 
 }
