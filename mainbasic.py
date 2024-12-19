@@ -94,7 +94,7 @@ async def play_audio_after_delay_welcome(client, char):
     await asyncio.sleep(1)
     #emotional feedback only once per scenario
     time = 0
-    while time < 38:
+    while time < 34:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
