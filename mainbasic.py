@@ -83,6 +83,7 @@ async def play_audio_after_delay_enter_highway(client, char):
     # async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
     #audio
     await display_emotions.display_emotion(client, char, "happy")
+    await asyncio.sleep(1)
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
     await display_emotions.display_emotion(client, char, "happy")
     #left 20 degree, wait 1s, right 20 degree (half speed) 
