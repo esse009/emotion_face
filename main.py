@@ -56,7 +56,7 @@ async def main_video():
 async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #horizonal 15 degree, wake up
     # await servomotor.rotate_servo(config.VERTICAL, 70, 0.5)
-    # await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
+    await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
      # exppressions: neutral-exciting
     await display_emotions.display_emotion(client, char, "happy")
     #audio
@@ -241,7 +241,7 @@ async def play_audio_after_delay_thanks(client, char, camera, classifier):
     #happy
     await display_emotions.display_emotion(client, char, "happy")
     # down 15 degree
-    await servomotor.rotate_servo(config.VERTICAL, 30, 0.5)
+    await servomotor.rotate_servo(config.VERTICAL, 50, 0.5)
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
