@@ -59,8 +59,8 @@ movements = {
 
 "sad":
      [
-        {"direction": VERTICAL, "angle": 50, "speed": 0.5},
         {"direction": VERTICAL, "angle": -50, "speed": 0.5},
+        {"direction": VERTICAL, "angle": 50, "speed": 0.5},
     ],
     
 "angry": 
