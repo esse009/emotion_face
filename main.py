@@ -41,7 +41,7 @@ SCHEDULE = {
     "overtaking": {"delay": 128, "timeout": 22},
     "construction": {"delay": 150, "timeout": 40},
     "traffic_jam": {"delay": 190, "timeout": 52},
-    "exit_highway": {"delay": 242, "timeout": 28},
+    "exit_highway": {"delay": 242, "timeout": 48},
     "thanks": {"delay": 290, "timeout": 8},
 }
 
