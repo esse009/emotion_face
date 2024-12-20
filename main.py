@@ -18,7 +18,7 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
         await asyncio.sleep(2)
 
 
-async def execute_task_with_timeout(task, timeout, start_time, *args, **kwargs):
+async def execute_task_with_timeout(task, timeout, *args, **kwargs):
     """
     在指定超时时间内执行任务，超过时间强制取消。
     """
@@ -26,23 +26,25 @@ async def execute_task_with_timeout(task, timeout, start_time, *args, **kwargs):
     try:
         await asyncio.wait_for(task(*args, **kwargs), timeout)
     except asyncio.TimeoutError:
-        elapsed_time = time.time() - start_time
-        print(f"Task {task_name} timed out and was cancelled at {elapsed_time:.2f} seconds.")
+        print(f"Task {task_name} timed out and was cancelled at {time.time():.2f} seconds.")
     except asyncio.CancelledError:
-        elapsed_time = time.time() - start_time
-        print(f"Task {task_name} was explicitly cancelled at {elapsed_time:.2f} seconds.")
+        print(f"Task {task_name} was explicitly cancelled at {time.time():.2f} seconds.")
+    finally:
+        print(f"Task {task_name} exited.")
+
 
 
 SCHEDULE = {
-    "welcome": 0,
-    "enter_highway": 45,
-    "speed_report": 75,
-    "overtaking": 128,
-    "construction": 150,
-    "traffic_jam": 190,
-    "exit_highway": 242,
-    "thanks": 290,
+    "welcome": {"delay": 0, "timeout": 45},
+    "enter_highway": {"delay": 45, "timeout": 30},
+    "speed_report": {"delay": 75, "timeout": 53},
+    "overtaking": {"delay": 128, "timeout": 22},
+    "construction": {"delay": 150, "timeout": 40},
+    "traffic_jam": {"delay": 190, "timeout": 52},
+    "exit_highway": {"delay": 242, "timeout": 28},
+    "thanks": {"delay": 290, "timeout": 8},
 }
+
 
 async def execute_task_at_exact_time(task, delay, *args, **kwargs):
     """
@@ -78,7 +80,10 @@ async def main_video():
     start_time = time.time()  # 记录任务开始的时间
 
     try:
-        for key, delay in SCHEDULE.items():
+        for key, task_info in SCHEDULE.items():
+            delay = task_info["delay"]
+            timeout = task_info["timeout"]
+
             # 计算相对延迟
             elapsed_time = time.time() - start_time
             time_to_wait = max(0, delay - elapsed_time)
@@ -102,9 +107,9 @@ async def main_video():
 
             # 启动新任务并记录
             elapsed_time = time.time() - start_time
-            print(f"Starting task {key} at {elapsed_time:.2f} seconds.")
+            print(f"Starting task {key} at {elapsed_time:.2f} seconds with timeout {timeout} seconds.")
             current_task = asyncio.create_task(
-                execute_task_with_timeout(task, 20, start_time, emotion_client, emotion_char, camera, classifier)
+                execute_task_with_timeout(task, timeout, emotion_client, emotion_char, camera, classifier)
             )
             await current_task
 
