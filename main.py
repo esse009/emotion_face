@@ -80,14 +80,14 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     await asyncio.sleep(2)
     time = 0
     displayed_once = False
-    while (time < 22):
+    while (time < 20):
         e = "neutral"
         if (not displayed_once):
             e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
         if (e != "neutral"):
             displayed_once = True
         await display_emotions.display_emotion(client, char, e)
-        await asyncio.sleep(min(22 - time, 2))
+        await asyncio.sleep(min(20 - time, 2))
         time += 2
 
 #enter highway
@@ -100,10 +100,6 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
     await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
     await asyncio.sleep(1)
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
-    await display_emotions.display_emotion(client, char, "neutral")
-    await asyncio.sleep(2)
-    await display_emotions.display_emotion(client, char, "neutral")
-    await asyncio.sleep(2)
     await display_emotions.display_emotion(client, char, "neutral")
     await asyncio.sleep(2)
     await display_emotions.display_emotion(client, char, "neutral")
