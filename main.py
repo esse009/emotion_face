@@ -54,6 +54,16 @@ async def execute_task_at_exact_time(task, delay, *args, **kwargs):
     await task(*args, **kwargs)
 
 
+async def sleep_and_display_emotion(client, char, emotion):
+    await asyncio.sleep(2)  
+    await display_emotions.display_emotion(client, char, emotion)
+ 
+# before audio
+                              # return control to loop so task can start
+# play audio
+
+
+
 
 # async def main():
 #     emotion_client = await display_emotions.get_client()
@@ -153,7 +163,11 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     await asyncio.sleep(2)
     #audio
     await display_emotions.display_emotion(client, char, "happy")
+    await display_emotions.display_emotion(client, char, "happy")
+    task = asyncio.create_task(sleep_and_display_emotion(client, char, "happy"))  # add task to event loop
+    await asyncio.sleep(0) 
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
+    await task
      # exppressions: neutral-exciting
     await display_emotions.display_emotion(client, char, "happy")
     # exppressions: neutral-exciting
@@ -212,7 +226,11 @@ async def play_audio_after_delay_enter_highway(client, char, camera=None, classi
 async def play_audio_after_delay_speed_report(client, char, camera, classifier):
     await display_emotions.display_emotion(client, char, "happy")
     #audio
-    os.system("aplay '/home/esse/Documents/audio/speedlimit.wav'")  # Replace with your audio file path
+    task = asyncio.create_task(sleep_and_display_emotion(client, char, "happy"))  # add task to event loop
+    await asyncio.sleep(0) 
+    os.system("aplay '/home/esse/Documents/audio/speedlimit.wav'") 
+    await task
+     # Replace with your audio file path
     #left 20 degree, wait 1.5s, right 20 degree (half speed) 
     await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
     #happy
@@ -252,7 +270,10 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
 async def play_audio_after_delay_overtaking(client, char, camera=None, classifier=None):
     await display_emotions.display_emotion(client, char, "neutral")
     #audio
+    task = asyncio.create_task(sleep_and_display_emotion(client, char, "neutral"))  # add task to event loop
+    await asyncio.sleep(0) 
     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
+    await task
     await display_emotions.display_emotion(client, char, "neutral")
     await display_emotions.display_emotion(client, char, "exciting")
      #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
@@ -279,7 +300,10 @@ async def play_audio_after_delay_construction(client, char, camera, classifier):
     #surprise
     await display_emotions.display_emotion(client, char, "surprise")
     #audio
+    task = asyncio.create_task(sleep_and_display_emotion(client, char, "surprise"))  # add task to event loop
+    await asyncio.sleep(0) 
     os.system("aplay '/home/esse/Documents/audio/construction.wav'")  # Replace with your audio file path
+    await task
     #up 20 degree
     # left 20 degree, wait 1.5s, right 20 degree (half speed) 
     await servomotor.rotate_servo(config.VERTICAL, -50, 0.5)
@@ -317,7 +341,10 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
     #sadness
     await display_emotions.display_emotion(client, char, "sadness")
     #audio
+    task = asyncio.create_task(sleep_and_display_emotion(client, char, "sadness"))  # add task to event loop
+    await asyncio.sleep(0) 
     os.system("aplay '/home/esse/Documents/audio/jam.wav'")  # Replace with your audio file path
+    await task
     #down 30 degree
     await display_emotions.display_emotion(client, char, "sadness")
     # left 20 degree, wait 1s, right 20 degree (half speed) 
