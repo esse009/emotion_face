@@ -18,16 +18,19 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
         await asyncio.sleep(2)
 
 
-async def execute_task_with_timeout(task, timeout, *args, **kwargs):
+async def execute_task_with_timeout(task, timeout, start_time, *args, **kwargs):
     """
     在指定超时时间内执行任务，超过时间强制取消。
     """
+    task_name = task.__name__ if hasattr(task, '__name__') else str(task)
     try:
         await asyncio.wait_for(task(*args, **kwargs), timeout)
     except asyncio.TimeoutError:
-        print(f"Task {task.__name__} timed out and was cancelled at {time.time():.2f} seconds.")
+        elapsed_time = time.time() - start_time
+        print(f"Task {task_name} timed out and was cancelled at {elapsed_time:.2f} seconds.")
     except asyncio.CancelledError:
-        print(f"Task {task.__name__} was explicitly cancelled at {time.time():.2f} seconds.")
+        elapsed_time = time.time() - start_time
+        print(f"Task {task_name} was explicitly cancelled at {elapsed_time:.2f} seconds.")
 
 
 SCHEDULE = {
@@ -94,11 +97,15 @@ async def main_video():
                 try:
                     await current_task
                 except asyncio.CancelledError:
-                    print(f"Previous task {current_task} was cancelled at {time.time() - start_time:.2f} seconds.")
+                    elapsed_time = time.time() - start_time
+                    print(f"Previous task {current_task.get_coro().__name__} was cancelled at {elapsed_time:.2f} seconds.")
 
             # 启动新任务并记录
-            print(f"Starting task {key} at {time.time() - start_time:.2f} seconds.")
-            current_task = asyncio.create_task(execute_task_with_timeout(task, 20, emotion_client, emotion_char, camera, classifier))
+            elapsed_time = time.time() - start_time
+            print(f"Starting task {key} at {elapsed_time:.2f} seconds.")
+            current_task = asyncio.create_task(
+                execute_task_with_timeout(task, 20, start_time, emotion_client, emotion_char, camera, classifier)
+            )
             await current_task
 
     except Exception as e:
@@ -107,9 +114,11 @@ async def main_video():
         # 确保清理所有资源
         if current_task and not current_task.done():
             current_task.cancel()
-            print(f"Final task {current_task} was cancelled at {time.time() - start_time:.2f} seconds.")
+            elapsed_time = time.time() - start_time
+            print(f"Final task {current_task.get_coro().__name__} was cancelled at {elapsed_time:.2f} seconds.")
         servomotor.stop_servos()
         emotion.cleanup_camera(camera)
+
 
 
 
