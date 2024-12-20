@@ -18,6 +18,27 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
         await asyncio.sleep(2)
 
 
+
+SCHEDULE = {
+    "welcome": 0,
+    "enter_highway": 45,
+    "speed_report": 70,
+    "overtaking": 121,
+    "construction": 146,
+    "traffic_jam": 182,
+    "exit_highway": 238,
+    "thanks": 285,
+}
+
+async def execute_task_at_exact_time(task, delay, *args, **kwargs):
+    """
+    在指定的延迟后执行任务。
+    """
+    await asyncio.sleep(delay)
+    await task(*args, **kwargs)
+
+
+
 # async def main():
 #     emotion_client = await display_emotions.get_client()
 #     emotion_char = await display_emotions.get_characteristic(emotion_client)
@@ -38,19 +59,38 @@ async def main_video():
     emotion_char = await display_emotions.get_characteristic(emotion_client)
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
+
+    tasks = []
+    for key, delay in SCHEDULE.items():
+        task = globals().get(f"play_audio_after_delay_{key}")
+        if task:
+            tasks.append(
+                execute_task_at_exact_time(task, delay, emotion_client, emotion_char, camera, classifier)
+            )
+
     try:
-      await play_audio_after_delay_welcome(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_enter_highway(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_speed_report(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_overtaking(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_construction(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_traffic_jam(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_exit_highway(emotion_client, emotion_char, camera, classifier)
-      await play_audio_after_delay_thanks(emotion_client, emotion_char, camera, classifier)
+        await asyncio.gather(*tasks)
     except Exception as e:
-        raise
-    servomotor.stop_servos() 
-    emotion.cleanup_camera(camera)
+        print(f"Error occurred: {e}")
+    finally:
+        servomotor.stop_servos()
+        emotion.cleanup_camera(camera)
+
+
+
+    # try:
+    #   await play_audio_after_delay_welcome(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_enter_highway(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_speed_report(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_overtaking(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_construction(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_traffic_jam(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_exit_highway(emotion_client, emotion_char, camera, classifier)
+    #   await play_audio_after_delay_thanks(emotion_client, emotion_char, camera, classifier)
+    # except Exception as e:
+    #     raise
+    # servomotor.stop_servos() 
+    # emotion.cleanup_camera(camera)
 
 #welcome 0-7,7-16 IVA behavior, 16-18 none
 async def play_audio_after_delay_welcome(client, char, camera, classifier):
