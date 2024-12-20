@@ -94,7 +94,7 @@ async def main_video():
                 try:
                     await current_task
                 except asyncio.CancelledError:
-                    print(f"Previous task {current_task} was cancelled.")
+                    print(f"Previous task {current_task} was cancelled at {time.time() - start_time:.2f} seconds.")
 
             # 启动新任务并记录
             print(f"Starting task {key} at {time.time() - start_time:.2f} seconds.")
@@ -107,6 +107,7 @@ async def main_video():
         # 确保清理所有资源
         if current_task and not current_task.done():
             current_task.cancel()
+            print(f"Final task {current_task} was cancelled at {time.time() - start_time:.2f} seconds.")
         servomotor.stop_servos()
         emotion.cleanup_camera(camera)
 
