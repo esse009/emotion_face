@@ -250,30 +250,30 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
         time += 2
 
 
-#overtaking
+# #overtaking
 
-async def play_audio_after_delay_overtaking(client, char):
-    await display_emotions.display_emotion(client, char, "neutral")
-    #audio
-    os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
-    await display_emotions.display_emotion(client, char, "neutral")
-    await display_emotions.display_emotion(client, char, "exciting")
-     #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
-    await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
-    await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
-    await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
-    await display_emotions.display_emotion(client, char, "exciting")
-    os.system("aplay '/home/esse/Documents/audio/nice.wav'")  # Replace with your audio file path
+# async def play_audio_after_delay_overtaking(client, char):
+#     await display_emotions.display_emotion(client, char, "neutral")
+#     #audio
+#     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
+#     await display_emotions.display_emotion(client, char, "neutral")
+#     await display_emotions.display_emotion(client, char, "exciting")
+#      #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
+#     await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
+#     await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
+#     await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
+#     await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
+#     await display_emotions.display_emotion(client, char, "exciting")
+#     os.system("aplay '/home/esse/Documents/audio/nice.wav'")  # Replace with your audio file path
     
-    time = 0
-    while time < 15:
-        e = "neutral"
-        # 显示 neutral 表情
-        await display_emotions.display_emotion(client, char, e)
-        # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(15 - time, 2))
-        time += 2
+#     time = 0
+#     while time < 15:
+#         e = "neutral"
+#         # 显示 neutral 表情
+#         await display_emotions.display_emotion(client, char, e)
+#         # 等待 2 秒或直到 41 秒为止
+#         await asyncio.sleep(min(15 - time, 2))
+#         time += 2
 
 
 #construction
