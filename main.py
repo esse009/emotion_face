@@ -23,11 +23,11 @@ SCHEDULE = {
     "welcome": 0,
     "enter_highway": 45,
     "speed_report": 70,
-    "overtaking": 121,
-    "construction": 146,
-    "traffic_jam": 182,
-    "exit_highway": 238,
-    "thanks": 285,
+    "overtaking": 124,
+    "construction": 148,
+    "traffic_jam": 184,
+    "exit_highway": 241,
+    "thanks": 290,
 }
 
 async def execute_task_at_exact_time(task, delay, *args, **kwargs):
