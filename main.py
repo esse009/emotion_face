@@ -432,12 +432,12 @@ async def play_audio_after_delay_exit_highway(client, char, camera=None, classif
 
     #emotional feedback only once per scenario
     time = 0
-    while time < 23:
+    while time < 40:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(23 - time, 2))
+        await asyncio.sleep(min(40 - time, 2))
         time += 2
 
 #shut down
