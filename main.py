@@ -161,8 +161,6 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     await asyncio.sleep(2)
     await display_emotions.display_emotion(client, char, "neutral")
     await asyncio.sleep(2)
-    await display_emotions.display_emotion(client, char, "neutral")
-    await asyncio.sleep(2)
     time = 0
     displayed_once = False
     while (time < 45):
