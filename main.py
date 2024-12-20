@@ -147,6 +147,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(2)
     #audio
+    await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
      # exppressions: neutral-exciting
     await display_emotions.display_emotion(client, char, "happy")
@@ -164,7 +165,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     await asyncio.sleep(2)
     time = 0
     displayed_once = False
-    while (time < 20):
+    while (time < 45):
         e = "neutral"
         if (not displayed_once):
             e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
