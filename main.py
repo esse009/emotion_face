@@ -71,7 +71,7 @@ async def main_video():
     try:
         await asyncio.gather(*tasks)
     except Exception as e:
-        print(f"Error occurred: {e}")
+        raise
     finally:
         servomotor.stop_servos()
         emotion.cleanup_camera(camera)
