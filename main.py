@@ -238,7 +238,7 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
 
 #overtaking
 
-async def play_audio_after_delay_overtaking(client, char, camera, classifier):
+async def play_audio_after_delay_overtaking(client, char):
     await display_emotions.display_emotion(client, char, "neutral")
     #audio
     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
@@ -264,7 +264,7 @@ async def play_audio_after_delay_overtaking(client, char, camera, classifier):
 
 #construction
 
-async def play_audio_after_delay_construction(client, char, camera, classifier):
+async def play_audio_after_delay_construction(client, char):
     #surprise
     await display_emotions.display_emotion(client, char, "surprise")
     #audio
