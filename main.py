@@ -25,9 +25,9 @@ async def execute_task_with_timeout(task, timeout, *args, **kwargs):
     try:
         await asyncio.wait_for(task(*args, **kwargs), timeout)
     except asyncio.TimeoutError:
-        print(f"Task {task.__name__} timed out and was cancelled.")
+        print(f"Task {task.__name__} timed out and was cancelled at {time.time():.2f} seconds.")
     except asyncio.CancelledError:
-        print(f"Task {task.__name__} was explicitly cancelled.")
+        print(f"Task {task.__name__} was explicitly cancelled at {time.time():.2f} seconds.")
 
 
 SCHEDULE = {
