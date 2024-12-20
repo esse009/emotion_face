@@ -274,7 +274,6 @@ async def play_audio_after_delay_overtaking(client, char, camera=None, classifie
     await asyncio.sleep(0) 
     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
     await task
-    await display_emotions.display_emotion(client, char, "neutral")
     await display_emotions.display_emotion(client, char, "exciting")
      #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
     await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
