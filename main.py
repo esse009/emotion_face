@@ -22,11 +22,11 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
 SCHEDULE = {
     "welcome": 0,
     "enter_highway": 45,
-    "speed_report": 70,
-    "overtaking": 124,
-    "construction": 148,
-    "traffic_jam": 184,
-    "exit_highway": 241,
+    "speed_report": 75,
+    "overtaking": 128,
+    "construction": 150,
+    "traffic_jam": 190,
+    "exit_highway": 242,
     "thanks": 290,
 }
 
