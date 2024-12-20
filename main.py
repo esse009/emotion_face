@@ -151,14 +151,14 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
     #emotional feedback only once per scenario
     time = 0
     displayed_once = False
-    while (time < 16):
+    while (time < 25):
         e = "neutral"
         if (not displayed_once):
             e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
         if (e != "neutral"):
             displayed_once = True
         await display_emotions.display_emotion(client, char, e)
-        await asyncio.sleep(min(16 - time, 2))
+        await asyncio.sleep(min(25 - time, 2))
         time += 2
 
 
