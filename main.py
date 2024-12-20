@@ -18,6 +18,17 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
         await asyncio.sleep(2)
 
 
+async def execute_task_with_timeout(task, timeout, *args, **kwargs):
+    """
+    在指定超时时间内执行任务，超过时间强制取消。
+    """
+    try:
+        await asyncio.wait_for(task(*args, **kwargs), timeout)
+    except asyncio.TimeoutError:
+        print(f"Task {task.__name__} timed out and was cancelled.")
+    except asyncio.CancelledError:
+        print(f"Task {task.__name__} was explicitly cancelled.")
+
 
 SCHEDULE = {
     "welcome": 0,
@@ -60,19 +71,42 @@ async def main_video():
     camera = emotion.get_camera()
     classifier = emotion.get_classifier()
 
-    tasks = []
-    for key, delay in SCHEDULE.items():
-        task = globals().get(f"play_audio_after_delay_{key}")
-        if task:
-            tasks.append(
-                execute_task_at_exact_time(task, delay, emotion_client, emotion_char, camera, classifier)
-            )
+    current_task = None  # 当前正在执行的任务
+    start_time = time.time()  # 记录任务开始的时间
 
     try:
-        await asyncio.gather(*tasks)
+        for key, delay in SCHEDULE.items():
+            # 计算相对延迟
+            elapsed_time = time.time() - start_time
+            time_to_wait = max(0, delay - elapsed_time)
+            if time_to_wait > 0:
+                await asyncio.sleep(time_to_wait)
+
+            # 获取要执行的任务
+            task = globals().get(f"play_audio_after_delay_{key}")
+            if not task:
+                print(f"No task found for {key}. Skipping...")
+                continue
+
+            # 如果有未完成的任务，取消它
+            if current_task and not current_task.done():
+                current_task.cancel()
+                try:
+                    await current_task
+                except asyncio.CancelledError:
+                    print(f"Previous task {current_task} was cancelled.")
+
+            # 启动新任务并记录
+            print(f"Starting task {key} at {time.time() - start_time:.2f} seconds.")
+            current_task = asyncio.create_task(execute_task_with_timeout(task, 20, emotion_client, emotion_char, camera, classifier))
+            await current_task
+
     except Exception as e:
         raise
     finally:
+        # 确保清理所有资源
+        if current_task and not current_task.done():
+            current_task.cancel()
         servomotor.stop_servos()
         emotion.cleanup_camera(camera)
 
