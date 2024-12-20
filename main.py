@@ -179,7 +179,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
         time += 2
 
 #enter highway
-async def play_audio_after_delay_enter_highway(client, char, camera, classifier):
+async def play_audio_after_delay_enter_highway(client, char):
     #audio
     await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
@@ -197,14 +197,11 @@ async def play_audio_after_delay_enter_highway(client, char, camera, classifier)
     await display_emotions.display_emotion(client, char, "neutral")
     await asyncio.sleep(2)
     time = 0
-    displayed_once = False
-    while (time < 11):
+    while time < 11:
         e = "neutral"
-        if (not displayed_once):
-            e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
-        if (e != "neutral"):
-            displayed_once = True
+        # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
+        # 等待 2 秒或直到 41 秒为止
         await asyncio.sleep(min(11 - time, 2))
         time += 2
 
@@ -252,33 +249,33 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
 
 # #overtaking
 
-# async def play_audio_after_delay_overtaking(client, char):
-#     await display_emotions.display_emotion(client, char, "neutral")
-#     #audio
-#     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
-#     await display_emotions.display_emotion(client, char, "neutral")
-#     await display_emotions.display_emotion(client, char, "exciting")
-#      #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
-#     await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
-#     await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
-#     await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
-#     await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
-#     await display_emotions.display_emotion(client, char, "exciting")
-#     os.system("aplay '/home/esse/Documents/audio/nice.wav'")  # Replace with your audio file path
+async def play_audio_after_delay_overtaking(client, char):
+    await display_emotions.display_emotion(client, char, "neutral")
+    #audio
+    os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
+    await display_emotions.display_emotion(client, char, "neutral")
+    await display_emotions.display_emotion(client, char, "exciting")
+     #left 15 degree, wait 0.5s, right 15 degree (full speed) *2
+    await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, 80, 1)
+    await servomotor.rotate_servo(config.HORIZONTAL, -80, 1)
+    await display_emotions.display_emotion(client, char, "exciting")
+    os.system("aplay '/home/esse/Documents/audio/nice.wav'")  # Replace with your audio file path
     
-#     time = 0
-#     while time < 15:
-#         e = "neutral"
-#         # 显示 neutral 表情
-#         await display_emotions.display_emotion(client, char, e)
-#         # 等待 2 秒或直到 41 秒为止
-#         await asyncio.sleep(min(15 - time, 2))
-#         time += 2
+    time = 0
+    while time < 15:
+        e = "neutral"
+        # 显示 neutral 表情
+        await display_emotions.display_emotion(client, char, e)
+        # 等待 2 秒或直到 41 秒为止
+        await asyncio.sleep(min(15 - time, 2))
+        time += 2
 
 
 #construction
 
-async def play_audio_after_delay_construction(client, char):
+async def play_audio_after_delay_construction(client, char, camera, classifier):
     #surprise
     await display_emotions.display_emotion(client, char, "surprise")
     #audio
@@ -293,14 +290,25 @@ async def play_audio_after_delay_construction(client, char):
     await servomotor.rotate_servo(config.HORIZONTAL, -60, 0.5)
     await asyncio.sleep(0.5)
     await servomotor.rotate_servo(config.VERTICAL, 50, 0.5)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
 
     #emotional feedback only once per scenario
     time = 0
-    while time < 24:
+    displayed_once = False
+    while (time < 24):
         e = "neutral"
-        # 显示 neutral 表情
+        if (not displayed_once):
+            e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
+        if (e != "neutral"):
+            displayed_once = True
         await display_emotions.display_emotion(client, char, e)
-        # 等待 2 秒或直到 41 秒为止
         await asyncio.sleep(min(24 - time, 2))
         time += 2
 
@@ -368,7 +376,7 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
 
 #exit highway
 #emotional feedback only once per scenario
-async def play_audio_after_delay_exit_highway(client, char, camera, classifier):
+async def play_audio_after_delay_exit_highway(client, char):
     #   audio
     await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/exithighway.wav'")  # Replace with your audio file path
@@ -398,21 +406,17 @@ async def play_audio_after_delay_exit_highway(client, char, camera, classifier):
 
     #emotional feedback only once per scenario
     time = 0
-    displayed_once = False
-    while (time < 23):
+    while time < 23:
         e = "neutral"
-        if (not displayed_once):
-            e = await perform_detection(camera, classifier, client, char, ignore_neutral=True)
-        if (e != "neutral"):
-            displayed_once = True
+        # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
+        # 等待 2 秒或直到 41 秒为止
         await asyncio.sleep(min(23 - time, 2))
         time += 2
 
-
 #shut down
 #emotional feedback only once per scenario
-async def play_audio_after_delay_thanks(client, char, camera, classifier):
+async def play_audio_after_delay_thanks(client, char):
     #happy
     await display_emotions.display_emotion(client, char, "happy")
     #audio
