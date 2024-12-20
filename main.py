@@ -179,7 +179,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
         time += 2
 
 #enter highway
-async def play_audio_after_delay_enter_highway(client, char):
+async def play_audio_after_delay_enter_highway(client, char, camera=None, classifier=None):
     #audio
     await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/enterhighway.wav'") 
@@ -249,7 +249,7 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
 
 # #overtaking
 
-async def play_audio_after_delay_overtaking(client, char):
+async def play_audio_after_delay_overtaking(client, char, camera=None, classifier=None):
     await display_emotions.display_emotion(client, char, "neutral")
     #audio
     os.system("aplay '/home/esse/Documents/audio/overtaking.wav'")  # Replace with your audio file path
@@ -376,7 +376,7 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
 
 #exit highway
 #emotional feedback only once per scenario
-async def play_audio_after_delay_exit_highway(client, char):
+async def play_audio_after_delay_exit_highway(client, char, camera=None, classifier=None):
     #   audio
     await display_emotions.display_emotion(client, char, "happy")
     os.system("aplay '/home/esse/Documents/audio/exithighway.wav'")  # Replace with your audio file path
@@ -416,7 +416,7 @@ async def play_audio_after_delay_exit_highway(client, char):
 
 #shut down
 #emotional feedback only once per scenario
-async def play_audio_after_delay_thanks(client, char):
+async def play_audio_after_delay_thanks(client, char, camera=None, classifier=None):
     #happy
     await display_emotions.display_emotion(client, char, "happy")
     #audio
