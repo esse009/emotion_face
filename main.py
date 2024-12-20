@@ -172,7 +172,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
         if (e != "neutral"):
             displayed_once = True
         await display_emotions.display_emotion(client, char, e)
-        await asyncio.sleep(min(20 - time, 2))
+        await asyncio.sleep(min(45 - time, 2))
         time += 2
 
 #enter highway
