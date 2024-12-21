@@ -283,6 +283,12 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
     await asyncio.sleep(2)
     await display_emotions.display_emotion(client, char, "neutral")
     await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
 
 
 # #overtaking
