@@ -221,12 +221,12 @@ async def play_audio_after_delay_enter_highway(client, char, camera=None, classi
     await display_emotions.display_emotion(client, char, "neutral")
     await asyncio.sleep(2)
     time = 0
-    while time < 20:
+    while time < 24:
         e = "neutral"
         # 显示 neutral 表情
         await display_emotions.display_emotion(client, char, e)
         # 等待 2 秒或直到 41 秒为止
-        await asyncio.sleep(min(20 - time, 2))
+        await asyncio.sleep(min(24 - time, 2))
         time += 2
 
 
