@@ -14,7 +14,11 @@ async def perform_detection( camera, classifier, client, char, ignore_neutral = 
     await display_emotions.display_emotion(client, char, e)
     await servomotor.move_by_emotion(e)
     if (e in config.dialogue):
-        os.system("aplay " + config.dialogue[e])  # Replace with your audio file path
+        await display_emotions.display_emotion(client, char, e)
+        os.system("aplay " + config.dialogue[e] + " &")  # Replace with your audio file path
+        await display_emotions.display_emotion(client, char, e)
+        await asyncio.sleep(2)
+        await display_emotions.display_emotion(client, char, e)
         await asyncio.sleep(2)
 
 
@@ -229,7 +233,10 @@ async def play_audio_after_delay_speed_report(client, char, camera, classifier):
     #audio
  
     os.system("aplay '/home/esse/Documents/audio/speedlimit.wav' &")
- 
+    await display_emotions.display_emotion(client, char, "happy")
+    await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "happy")
+    await asyncio.sleep(2)
      # Replace with your audio file path
     #left 20 degree, wait 1.5s, right 20 degree (half speed) 
     await servomotor.rotate_servo(config.HORIZONTAL, 60, 0.5)
@@ -344,7 +351,7 @@ async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
     await display_emotions.display_emotion(client, char, "sadness")
     #audio
    
-    os.system("aplay '/home/esse/Documents/audio/construction.wav' &")  # Replace with your audio file path
+    os.system("aplay '/home/esse/Documents/audio/jam.wav' &")  # Replace with your audio file path
    
     #down 30 degree
     await display_emotions.display_emotion(client, char, "sadness")
