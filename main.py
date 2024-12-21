@@ -163,11 +163,8 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     await asyncio.sleep(2)
     #audio
     await display_emotions.display_emotion(client, char, "happy")
-    await display_emotions.display_emotion(client, char, "happy")
-    task = asyncio.create_task(sleep_and_display_emotion(client, char, "happy"))  # add task to event loop
-    await asyncio.sleep(0) 
+    
     os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
-    await task
      # exppressions: neutral-exciting
     await display_emotions.display_emotion(client, char, "happy")
     # exppressions: neutral-exciting
