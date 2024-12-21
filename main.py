@@ -42,7 +42,7 @@ SCHEDULE = {
     "welcome": {"delay": 0, "timeout": 45},
     "enter_highway": {"delay": 45, "timeout": 30},
     "speed_report": {"delay": 75, "timeout": 53},
-    "overtaking": {"delay": 128, "timeout": 22},
+    "overtaking": {"delay": 127, "timeout": 22},
     "construction": {"delay": 150, "timeout": 40},
     "traffic_jam": {"delay": 190, "timeout": 52},
     "exit_highway": {"delay": 242, "timeout": 48},
@@ -367,15 +367,20 @@ async def play_audio_after_delay_construction(client, char, camera, classifier):
     await asyncio.sleep(2)
     await display_emotions.display_emotion(client, char, "neutral")
     await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
+    await display_emotions.display_emotion(client, char, "neutral")
+    await asyncio.sleep(2)
 
 #traffic jam
 async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
     #sadness
-    await display_emotions.display_emotion(client, char, "sadness")
-    await asyncio.sleep(1)
+    
     await display_emotions.display_emotion(client, char, "sadness")
     os.system("aplay '/home/esse/Documents/audio/jam.wav' &")  # Replace with your audio file path
     await display_emotions.display_emotion(client, char, "sadness")
+    await display_emotions.display_emotion(client, char, "sadness")
+    await asyncio.sleep(1)
     # left 20 degree, wait 1s, right 20 degree (half speed) 
     # up 15 degree
     await servomotor.rotate_servo(config.VERTICAL, 50, 0.5)
