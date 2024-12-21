@@ -230,8 +230,7 @@ async def play_audio_after_delay_enter_highway(client, char, camera=None, classi
 #emotional feedback only once per scenario
 async def play_audio_after_delay_speed_report(client, char, camera, classifier):
     await display_emotions.display_emotion(client, char, "happy")
-    #audio
- 
+    await asyncio.sleep(1)
     os.system("aplay '/home/esse/Documents/audio/speedlimit.wav' &")
     await display_emotions.display_emotion(client, char, "happy")
     await asyncio.sleep(2)
@@ -349,11 +348,9 @@ async def play_audio_after_delay_construction(client, char, camera, classifier):
 async def play_audio_after_delay_traffic_jam(client, char, camera, classifier):
     #sadness
     await display_emotions.display_emotion(client, char, "sadness")
-    #audio
-   
+    await asyncio.sleep(1)
+    await display_emotions.display_emotion(client, char, "sadness")
     os.system("aplay '/home/esse/Documents/audio/jam.wav' &")  # Replace with your audio file path
-   
-    #down 30 degree
     await display_emotions.display_emotion(client, char, "sadness")
     # left 20 degree, wait 1s, right 20 degree (half speed) 
     # up 15 degree
