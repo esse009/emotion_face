@@ -164,7 +164,7 @@ async def play_audio_after_delay_welcome(client, char, camera, classifier):
     #audio
     await display_emotions.display_emotion(client, char, "happy")
     
-    os.spawnv(os.P_NOWAIT, 'aplay', ['/home/esse/Documents/audio/welcome.wav'])
+    os.spawnv(os.P_NOWAIT, '/usr/bin/aplay', ['/home/esse/Documents/audio/welcome.wav'])
 
     # os.system("aplay '/home/esse/Documents/audio/welcome.wav'")
      # exppressions: neutral-exciting
