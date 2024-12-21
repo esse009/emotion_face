@@ -41,8 +41,8 @@ async def execute_task_with_timeout(task, timeout, *args, **kwargs):
 SCHEDULE = {
     "welcome": {"delay": 0, "timeout": 45},
     "enter_highway": {"delay": 45, "timeout": 30},
-    "speed_report": {"delay": 75, "timeout": 53},
-    "overtaking": {"delay": 127, "timeout": 22},
+    "speed_report": {"delay": 75, "timeout": 51},
+    "overtaking": {"delay": 126, "timeout": 24},
     "construction": {"delay": 150, "timeout": 40},
     "traffic_jam": {"delay": 190, "timeout": 52},
     "exit_highway": {"delay": 242, "timeout": 48},
