@@ -484,7 +484,7 @@ async def play_audio_after_delay_thanks(client, char, camera=None, classifier=No
     #audio
     os.system("aplay '/home/esse/Documents/audio/thanks.wav'")  # Replace with your audio file path
     # down 15 degree
-    await servomotor.rotate_servo(config.VERTICAL, 70, 1)
+    await servomotor.rotate_servo(config.VERTICAL, 80, 1)
  
 if __name__ == "__main__":
     # if want to play video version
